@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 var speed: float = 220.0
 
-var click_location: Vector2
+var playerIsReadyToAttack: bool
 var target_location: Vector2
 var mouse_is_on_player: bool
 var dash = false
@@ -19,7 +19,7 @@ func _physics_process(delta):
 		velocity = dash_speed
 		if distance.length() <= 5:
 			print("DASH IS DONE")
-			click_location = Vector2(0,0)
+			playerIsReadyToAttack = false
 			velocity = Vector2(0,0)
 			dash = false
 
@@ -27,10 +27,10 @@ func _physics_process(delta):
 	if not dash:
 		# Click on player
 		if Input.is_action_just_pressed("click") and mouse_is_on_player:
-			click_location = get_global_mouse_position()
-			print(click_location)
+			playerIsReadyToAttack = true
+			print(playerIsReadyToAttack)
 		# Click anywhere that's not player
-		if Input.is_action_pressed("click") and not mouse_is_on_player and click_location == Vector2(0,0):
+		if Input.is_action_pressed("click") and not mouse_is_on_player and not playerIsReadyToAttack:
 			direction = (get_global_mouse_position() - position).normalized()
 			distance = (get_global_mouse_position() - position)
 			if distance.length() >= 5:
@@ -40,10 +40,10 @@ func _physics_process(delta):
 			velocity = Vector2(0,0)
 
 		
-		if Input.is_action_just_released("click") and not mouse_is_on_player and click_location != Vector2(0,0):
+		if Input.is_action_just_released("click") and not mouse_is_on_player and playerIsReadyToAttack:
 			target_location = get_global_mouse_position()
 			print(target_location)
-			print(click_location)
+			print(playerIsReadyToAttack)
 			dash = true
 			direction = (target_location - position).normalized()
 			
@@ -52,8 +52,8 @@ func _physics_process(delta):
 		
 		
 	#if Input.is_action_just_released("click"):
-		#click_location = Vector2(0,0)
-		#print(click_location)
+		#playerIsReadyToAttack = Vector2(0,0)
+		#print(playerIsReadyToAttack)
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -66,9 +66,6 @@ func _physics_process(delta):
 func dashToPoint(target_locations):
 	pass
 	
-func moveToCursor():
-	direction = (click_location - position).normalized()
-	velocity = direction * speed
 	
 func returnDirectionToMouse():
 	distance = (get_global_mouse_position() - position)
