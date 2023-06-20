@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8xosetoc7mpa"]
+
+[ext_resource type="PackedScene" uid="uid://dxbsksc7i1htr" path="res://CollisionBoxes/CollisionBox.tscn" id="1_axy8b"]
+[ext_resource type="Script" path="res://HurtboxComponent.gd" id="2_h5bry"]
+
+[node name="HurtboxComponent" instance=ExtResource("1_axy8b")]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("2_h5bry")

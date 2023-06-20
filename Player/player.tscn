@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dj4abotujeis2"]
+[gd_scene load_steps=9 format=3 uid="uid://dj4abotujeis2"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_m72el"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_4cu8s"]
 [ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="1_v3pwk"]
+[ext_resource type="PackedScene" uid="uid://c8xosetoc7mpa" path="res://CollisionBoxes/hurtbox_component.tscn" id="3_kmtpl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yte7j"]
 size = Vector2(123, 121)
@@ -9,8 +10,19 @@ size = Vector2(123, 121)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dg0lh"]
 size = Vector2(156, 155)
 
+[sub_resource type="Animation" id="Animation_q0wfs"]
+resource_name = "test"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_peo8d"]
+_data = {
+"test": SubResource("Animation_q0wfs")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uurff"]
+size = Vector2(63, 57)
+
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_m72el")
+script = ExtResource("1_4cu8s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -32,6 +44,20 @@ debug_color = Color(0.172549, 0.619608, 0.494118, 0.419608)
 wait_time = 0.5
 one_shot = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_peo8d")
+}
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("3_kmtpl")]
+origin = NodePath("..")
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_uurff")
+
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+
+[editable path="HurtboxComponent"]

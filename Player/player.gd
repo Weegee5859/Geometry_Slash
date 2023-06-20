@@ -15,7 +15,7 @@ func _physics_process(delta):
 
 	if dash:
 		distance = (target_location - position)
-		dash_speed = distance / 0.08
+		dash_speed = distance / 0.07
 		velocity = dash_speed
 		if distance.length() <= 5:
 			print("DASH IS DONE")
@@ -25,7 +25,7 @@ func _physics_process(delta):
 
 		
 	if not dash:
-		# Click on player
+		# If you click on player, player is ready to attack
 		if Input.is_action_just_pressed("click") and mouse_is_on_player:
 			playerIsReadyToAttack = true
 			print(playerIsReadyToAttack)
@@ -70,7 +70,7 @@ func dashToPoint(target_locations):
 func returnDirectionToMouse():
 	distance = (get_global_mouse_position() - position)
 
-func _on_area_2d_input_event(viewport, event, shape_idx):
+func _on_area_2d_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		pass
 		#print(event)
