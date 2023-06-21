@@ -1,8 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dj4abotujeis2"]
+[gd_scene load_steps=13 format=3 uid="uid://dj4abotujeis2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4cu8s"]
 [ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="1_v3pwk"]
 [ext_resource type="PackedScene" uid="uid://c8xosetoc7mpa" path="res://CollisionBoxes/hurtbox_component.tscn" id="3_kmtpl"]
+[ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="4_hc8hj"]
+[ext_resource type="PackedScene" uid="uid://bjgquag0s4p8w" path="res://Components/EntityComponents/health_component.tscn" id="5_fn2c3"]
+[ext_resource type="PackedScene" uid="uid://dmjfih37ghqlu" path="res://Components/EntityComponents/state_machine.tscn" id="6_eo0sq"]
+[ext_resource type="PackedScene" uid="uid://dvbeytb1yngbl" path="res://Components/EntityComponents/states/movement_state.tscn" id="7_2f3ug"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yte7j"]
 size = Vector2(123, 121)
@@ -55,6 +59,17 @@ origin = NodePath("..")
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_uurff")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("4_hc8hj")]
+active = false
+origin = NodePath("..")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_fn2c3")]
+
+[node name="StateMachine" parent="." instance=ExtResource("6_eo0sq")]
+
+[node name="MovementState" parent="StateMachine" node_paths=PackedStringArray("character") instance=ExtResource("7_2f3ug")]
+character = NodePath("../..")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
