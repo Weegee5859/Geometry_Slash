@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bimh75ljo2dtt"]
+[gd_scene load_steps=4 format=3 uid="uid://bimh75ljo2dtt"]
 
 [ext_resource type="PackedScene" uid="uid://dxbsksc7i1htr" path="res://CollisionBoxes/CollisionBox.tscn" id="1_owijx"]
 [ext_resource type="Script" path="res://CollisionBoxes/HitboxComponent.gd" id="2_px8tk"]
+[ext_resource type="PackedScene" uid="uid://b6q3atgd5rv8w" path="res://Components/EntityComponents/damage_component.tscn" id="3_7xx6k"]
 
 [node name="HitboxComponent" instance=ExtResource("1_owijx")]
 collision_layer = 32
 collision_mask = 64
 script = ExtResource("2_px8tk")
+
+[node name="DamageComponent" parent="." index="1" instance=ExtResource("3_7xx6k")]
+damage = 1
+knockback = 1
+hitstun = 1

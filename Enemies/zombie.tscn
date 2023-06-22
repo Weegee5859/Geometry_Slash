@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://glgt2gsn3dwg"]
+
+[ext_resource type="PackedScene" uid="uid://0fqqmwll3635" path="res://Enemies/EnemyBase.tscn" id="1_n7lsy"]
+[ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="2_ggs73"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vaobf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfku4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nq8l3"]
+
+[node name="Zombie" instance=ExtResource("1_n7lsy")]
+
+[node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("health_component", "origin")]
+health_component = NodePath("../HealthComponent")
+origin = NodePath("..")
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_vaobf")
+
+[node name="Sprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_cfku4")
+position = Vector2(-1, -1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_ggs73")
+
+[node name="CollisionShape2D" parent="." index="3"]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_nq8l3")
+disabled = true
+
+[editable path="HurtboxComponent"]

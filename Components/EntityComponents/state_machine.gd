@@ -1,7 +1,8 @@
 extends Node2D
 class_name StateMachine
-var states: Dictionary
-var current_state: State
+@onready var states: Dictionary
+@onready var current_state: State
+@export var host: CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,10 +27,14 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if current_state:
-		current_state.processState()
+		current_state.processState(delta)
+		
+func _physics_process(delta):
+	if current_state:
+		current_state.physicsProcessState(delta)
 		
 func changeState(new_states_name: String):
-	if not states[new_states_name.to_lower()]:
+	if not new_states_name.to_lower() in states:
 		print("changeState: State doesnt exist in statemachine's state list!")
 		return
 	
@@ -39,5 +44,6 @@ func changeState(new_states_name: String):
 	current_state = states[new_states_name.to_lower()]
 	#Enter State
 	current_state.enterState()
+	print("CHANGED STATE TO " + str(current_state))
 	
 

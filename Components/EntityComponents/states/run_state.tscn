@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvbeytb1yngbl"]
 
 [ext_resource type="PackedScene" uid="uid://bn2ivtwpa6gjv" path="res://Components/EntityComponents/state.tscn" id="1_fbmc7"]
-[ext_resource type="Script" path="res://Components/EntityComponents/states/MovementState.gd" id="2_7af8f"]
+[ext_resource type="Script" path="res://Components/EntityComponents/states/RunState.gd" id="2_7af8f"]
 
-[node name="MovementState" instance=ExtResource("1_fbmc7")]
+[node name="RunState" instance=ExtResource("1_fbmc7")]
 script = ExtResource("2_7af8f")

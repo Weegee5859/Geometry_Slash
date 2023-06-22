@@ -10,3 +10,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
+func enableBox():
+	active = true
+	print("ENABLED")
+
+func disableBox():
+	active = false
+	print("DISABLED")

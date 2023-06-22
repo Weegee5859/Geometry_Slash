@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dj4abotujeis2"]
+[gd_scene load_steps=17 format=3 uid="uid://dj4abotujeis2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4cu8s"]
 [ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="1_v3pwk"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="4_hc8hj"]
 [ext_resource type="PackedScene" uid="uid://bjgquag0s4p8w" path="res://Components/EntityComponents/health_component.tscn" id="5_fn2c3"]
 [ext_resource type="PackedScene" uid="uid://dmjfih37ghqlu" path="res://Components/EntityComponents/state_machine.tscn" id="6_eo0sq"]
-[ext_resource type="PackedScene" uid="uid://dvbeytb1yngbl" path="res://Components/EntityComponents/states/movement_state.tscn" id="7_2f3ug"]
+[ext_resource type="PackedScene" uid="uid://dvbeytb1yngbl" path="res://Components/EntityComponents/states/run_state.tscn" id="7_2f3ug"]
+[ext_resource type="PackedScene" uid="uid://ddt4656m0ouik" path="res://Components/EntityComponents/states/idle_state.tscn" id="7_7mqim"]
+[ext_resource type="PackedScene" uid="uid://oikntwuy5f7g" path="res://Components/EntityComponents/states/ready_state.tscn" id="9_g5mtj"]
+[ext_resource type="PackedScene" uid="uid://c54vfjk1whbl4" path="res://Components/EntityComponents/states/dash_state.tscn" id="10_apkgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yte7j"]
 size = Vector2(123, 121)
@@ -25,6 +28,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uurff"]
 size = Vector2(63, 57)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h70yl"]
+size = Vector2(77, 76)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4cu8s")
 
@@ -36,9 +42,9 @@ texture = ExtResource("1_v3pwk")
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_yte7j")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="MouseDetectionArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetectionArea"]
 position = Vector2(-2, 1.5)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_dg0lh")
@@ -53,7 +59,9 @@ libraries = {
 "": SubResource("AnimationLibrary_peo8d")
 }
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("3_kmtpl")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "origin") instance=ExtResource("3_kmtpl")]
+health_component = NodePath("../HealthComponent")
+active = false
 origin = NodePath("..")
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
@@ -61,18 +69,33 @@ position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_uurff")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("4_hc8hj")]
-active = false
 origin = NodePath("..")
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(-1.5, 2)
+shape = SubResource("RectangleShape2D_h70yl")
+debug_color = Color(0.972549, 0.141176, 0.25098, 0.419608)
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_fn2c3")]
 
-[node name="StateMachine" parent="." instance=ExtResource("6_eo0sq")]
+[node name="StateMachine" parent="." node_paths=PackedStringArray("host") instance=ExtResource("6_eo0sq")]
+host = NodePath("..")
 
-[node name="MovementState" parent="StateMachine" node_paths=PackedStringArray("character") instance=ExtResource("7_2f3ug")]
-character = NodePath("../..")
+[node name="IdleState" parent="StateMachine" node_paths=PackedStringArray("player") instance=ExtResource("7_7mqim")]
+player = NodePath("../..")
 
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[node name="RunState" parent="StateMachine" node_paths=PackedStringArray("player") instance=ExtResource("7_2f3ug")]
+player = NodePath("../..")
+
+[node name="ReadyState" parent="StateMachine" node_paths=PackedStringArray("player") instance=ExtResource("9_g5mtj")]
+player = NodePath("../..")
+
+[node name="DashState" parent="StateMachine" node_paths=PackedStringArray("player") instance=ExtResource("10_apkgl")]
+player = NodePath("../..")
+
+[connection signal="input_event" from="MouseDetectionArea" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="MouseDetectionArea" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="MouseDetectionArea" to="." method="_on_area_2d_mouse_exited"]
 
 [editable path="HurtboxComponent"]
+[editable path="HitboxComponent"]

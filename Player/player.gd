@@ -1,51 +1,28 @@
 extends CharacterBody2D
 
+@onready var hitbox_component = $HitboxComponent
+@onready var hurtbox_component = $HurtboxComponent
 
-var speed: float = 220.0
 
-var playerIsReadyToAttack: bool
-var target_location: Vector2
-var mouse_is_on_player: bool
-var dash = false
+@onready var speed: float = 220.0
 
-var direction: Vector2
-var distance: Vector2
-var dash_speed: Vector2
+@onready var playerIsReadyToAttack: bool
+@onready var target_location: Vector2
+@onready var mouse_is_on_player: bool
+@onready var dash = false
+
+@onready var direction: Vector2
+@onready var distance: Vector2
+@onready var dash_speed: Vector2
 func _physics_process(delta):
-
+	return
 	if dash:
-		distance = (target_location - position)
-		dash_speed = distance / 0.07
-		velocity = dash_speed
-		if distance.length() <= 5:
-			print("DASH IS DONE")
-			playerIsReadyToAttack = false
-			velocity = Vector2(0,0)
-			dash = false
+		pass
 
 		
 	if not dash:
-		# If you click on player, player is ready to attack
-		if Input.is_action_just_pressed("click") and mouse_is_on_player:
-			playerIsReadyToAttack = true
-			print(playerIsReadyToAttack)
-		# Click anywhere that's not player
-		if Input.is_action_pressed("click") and not mouse_is_on_player and not playerIsReadyToAttack:
-			direction = (get_global_mouse_position() - position).normalized()
-			distance = (get_global_mouse_position() - position)
-			if distance.length() >= 5:
-				velocity = direction * speed
-			
-		else:
-			velocity = Vector2(0,0)
+		pass
 
-		
-		if Input.is_action_just_released("click") and not mouse_is_on_player and playerIsReadyToAttack:
-			target_location = get_global_mouse_position()
-			print(target_location)
-			print(playerIsReadyToAttack)
-			dash = true
-			direction = (target_location - position).normalized()
 			
 		
 		

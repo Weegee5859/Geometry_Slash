@@ -21,5 +21,8 @@ func enterState():
 func exitState():
 	pass
 	
-func processState():
+func processState(delta):
+	pass
+	
+func physicsProcessState(delta):
 	pass

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://djdwprsqs57gc"]
+
+[ext_resource type="PackedScene" uid="uid://bn2ivtwpa6gjv" path="res://Components/EntityComponents/state.tscn" id="1_20irx"]
+[ext_resource type="Script" path="res://Components/EntityComponents/states/HitstunState.gd" id="2_evool"]
+
+[node name="HitstunState" instance=ExtResource("1_20irx")]
+script = ExtResource("2_evool")

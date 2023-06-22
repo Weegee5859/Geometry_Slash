@@ -1,4 +1,5 @@
 extends Node2D
+class_name HealthComponent
 @export var max_health: int = 100
 @export var current_health: int
 
@@ -7,10 +8,9 @@ extends Node2D
 func _ready():
 	current_health = max_health
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 func takeDamage():
-	pass
+	print("took damage")
