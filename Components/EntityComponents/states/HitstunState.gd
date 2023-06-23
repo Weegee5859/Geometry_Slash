@@ -7,6 +7,9 @@ class_name HitstunState
 
 func enterState():
 	entity.hurtbox_component.disableBox()
+	#hitflash
+	if entity.sprite.material.get_shader_parameter("enabled") != null:
+		entity.sprite.material.set_shader_parameter("enabled", true)
 
 func physicsProcessState(delta):
 	#print(damage.knockback)
@@ -18,8 +21,9 @@ func physicsProcessState(delta):
 		entity.velocity = direction * 100
 		timer-=delta
 	if timer<=0:
-		state_machine.changeState("idlestate")
-		state_machine.changeState("idlestateai")
+		state_machine.changeToPreviousState()
+		#state_machine.changeState("idlestate")
+		#state_machine.changeState("idlestateai")
 	entity.move_and_slide()
 
 func processDamage(damage: DamageComponent,position: Vector2):
@@ -28,4 +32,7 @@ func processDamage(damage: DamageComponent,position: Vector2):
 	
 func exitState():
 	entity.hurtbox_component.enableBox()
+	#hitflash
+	if entity.sprite.material.get_shader_parameter("enabled") != null:
+		entity.sprite.material.set_shader_parameter("enabled", false)
 	timer = 5

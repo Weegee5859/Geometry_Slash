@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://dj4abotujeis2"]
+[gd_scene load_steps=20 format=3 uid="uid://dj4abotujeis2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4cu8s"]
 [ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="1_v3pwk"]
+[ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="2_usk50"]
 [ext_resource type="PackedScene" uid="uid://c8xosetoc7mpa" path="res://CollisionBoxes/hurtbox_component.tscn" id="3_kmtpl"]
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="4_hc8hj"]
 [ext_resource type="PackedScene" uid="uid://bjgquag0s4p8w" path="res://Components/EntityComponents/health_component.tscn" id="5_fn2c3"]
@@ -11,6 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://oikntwuy5f7g" path="res://Components/EntityComponents/states/ready_state.tscn" id="9_g5mtj"]
 [ext_resource type="PackedScene" uid="uid://c54vfjk1whbl4" path="res://Components/EntityComponents/states/dash_state.tscn" id="10_apkgl"]
 [ext_resource type="PackedScene" uid="uid://djdwprsqs57gc" path="res://Components/EntityComponents/hitstun_state.tscn" id="11_mhhc2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s4u14"]
+shader = ExtResource("2_usk50")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yte7j"]
 size = Vector2(123, 121)
@@ -36,6 +42,7 @@ size = Vector2(77, 76)
 script = ExtResource("1_4cu8s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_s4u14")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_v3pwk")
 
@@ -81,7 +88,7 @@ shape = SubResource("RectangleShape2D_h70yl")
 debug_color = Color(0.972549, 0.141176, 0.25098, 0.419608)
 
 [node name="DamageComponent" parent="HitboxComponent" index="1"]
-damage = 1000
+damage = 10
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_fn2c3")]
 

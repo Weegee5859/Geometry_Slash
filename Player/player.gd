@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 @onready var hitbox_component = $HitboxComponent
 @onready var hurtbox_component = $HurtboxComponent
 
@@ -14,6 +15,12 @@ extends CharacterBody2D
 @onready var direction: Vector2
 @onready var distance: Vector2
 @onready var dash_speed: Vector2
+
+@onready var sprite = $Sprite2D
+
+func _ready():
+	Global.addPlayer(self)
+	
 
 func _physics_process(delta):
 	return
