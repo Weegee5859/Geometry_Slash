@@ -14,6 +14,7 @@ extends CharacterBody2D
 @onready var direction: Vector2
 @onready var distance: Vector2
 @onready var dash_speed: Vector2
+
 func _physics_process(delta):
 	return
 	if dash:

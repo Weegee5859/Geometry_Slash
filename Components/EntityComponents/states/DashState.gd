@@ -3,6 +3,7 @@ extends "res://Components/EntityComponents/state.gd"
 
 func enterState():
 	player.hitbox_component.enableBox()
+	player.hurtbox_component.disableBox()
 
 func physicsProcessState(delta):
 	player.distance = (player.target_location - player.position)
@@ -15,3 +16,4 @@ func physicsProcessState(delta):
 
 func exitState():
 	player.hitbox_component.disableBox()
+	player.hurtbox_component.enableBox()

@@ -1,7 +1,7 @@
 extends "res://CollisionBoxes/CollisionBox.gd"
 class_name HitboxComponent
 
-@export var Damage: DamageComponent
+@export var damage: DamageComponent
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,8 +16,11 @@ func _process(delta):
 		
 		if body is HurtboxComponent:
 			if body.origin == origin: continue
+			if not body.active: continue
 			if body.health_component:
-				
-				body.health_component.takeDamage()
+				body.health_component.takeDamage(damage)
+			if body.hitstun_state and body.state_machine:
+				body.hitstun_state.processDamage(damage,origin.position)
+				body.state_machine.changeState("hitstunstate")
 		#if bodies is hurtbox:
 			#hurtbox.takeDamage()

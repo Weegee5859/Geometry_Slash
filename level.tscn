@@ -9,4 +9,4 @@
 position = Vector2(406, 237)
 
 [node name="Zombie" parent="." instance=ExtResource("2_2yuse")]
-position = Vector2(151, 106)
+position = Vector2(270, 217)

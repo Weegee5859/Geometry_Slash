@@ -37,6 +37,9 @@ func changeState(new_states_name: String):
 	if not new_states_name.to_lower() in states:
 		print("changeState: State doesnt exist in statemachine's state list!")
 		return
+	if current_state.name.to_lower() == new_states_name.to_lower():
+		print("changeState: " + str(current_state.name.to_lower()) + " is already in use!")
+		return
 	
 	#exit current state
 	current_state.exitState()

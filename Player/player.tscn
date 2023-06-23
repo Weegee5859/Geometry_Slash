@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dj4abotujeis2"]
+[gd_scene load_steps=18 format=3 uid="uid://dj4abotujeis2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4cu8s"]
 [ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="1_v3pwk"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ddt4656m0ouik" path="res://Components/EntityComponents/states/idle_state.tscn" id="7_7mqim"]
 [ext_resource type="PackedScene" uid="uid://oikntwuy5f7g" path="res://Components/EntityComponents/states/ready_state.tscn" id="9_g5mtj"]
 [ext_resource type="PackedScene" uid="uid://c54vfjk1whbl4" path="res://Components/EntityComponents/states/dash_state.tscn" id="10_apkgl"]
+[ext_resource type="PackedScene" uid="uid://djdwprsqs57gc" path="res://Components/EntityComponents/hitstun_state.tscn" id="11_mhhc2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yte7j"]
 size = Vector2(123, 121)
@@ -59,22 +60,28 @@ libraries = {
 "": SubResource("AnimationLibrary_peo8d")
 }
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "origin") instance=ExtResource("3_kmtpl")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "state_machine", "hitstun_state", "origin") instance=ExtResource("3_kmtpl")]
 health_component = NodePath("../HealthComponent")
-active = false
+state_machine = NodePath("../StateMachine")
+hitstun_state = NodePath("../StateMachine/HitstunState")
 origin = NodePath("..")
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_uurff")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("4_hc8hj")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("damage", "origin") instance=ExtResource("4_hc8hj")]
+damage = NodePath("DamageComponent")
+active = false
 origin = NodePath("..")
 
 [node name="CollisionShape2D" parent="HitboxComponent" index="0"]
 position = Vector2(-1.5, 2)
 shape = SubResource("RectangleShape2D_h70yl")
 debug_color = Color(0.972549, 0.141176, 0.25098, 0.419608)
+
+[node name="DamageComponent" parent="HitboxComponent" index="1"]
+damage = 1000
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_fn2c3")]
 
@@ -92,6 +99,9 @@ player = NodePath("../..")
 
 [node name="DashState" parent="StateMachine" node_paths=PackedStringArray("player") instance=ExtResource("10_apkgl")]
 player = NodePath("../..")
+
+[node name="HitstunState" parent="StateMachine" node_paths=PackedStringArray("entity") instance=ExtResource("11_mhhc2")]
+entity = NodePath("../..")
 
 [connection signal="input_event" from="MouseDetectionArea" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="MouseDetectionArea" to="." method="_on_area_2d_mouse_entered"]

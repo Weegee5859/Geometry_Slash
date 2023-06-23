@@ -1,7 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://glgt2gsn3dwg"]
+[gd_scene load_steps=12 format=3 uid="uid://glgt2gsn3dwg"]
 
 [ext_resource type="PackedScene" uid="uid://0fqqmwll3635" path="res://Enemies/EnemyBase.tscn" id="1_n7lsy"]
+[ext_resource type="Script" path="res://Enemies/zombie.gd" id="2_fpapq"]
 [ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="2_ggs73"]
+[ext_resource type="PackedScene" uid="uid://dmjfih37ghqlu" path="res://Components/EntityComponents/state_machine.tscn" id="3_4xepk"]
+[ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="3_5s1dp"]
+[ext_resource type="PackedScene" uid="uid://djdwprsqs57gc" path="res://Components/EntityComponents/hitstun_state.tscn" id="4_yx4u7"]
+[ext_resource type="PackedScene" uid="uid://c7u2fjsa70nwg" path="res://Components/EntityComponents/states/idle_state_ai.tscn" id="5_dpnef"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaobf"]
 
@@ -9,10 +14,16 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nq8l3"]
 
-[node name="Zombie" instance=ExtResource("1_n7lsy")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xi0w1"]
+size = Vector2(40, 40)
 
-[node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("health_component", "origin")]
+[node name="Zombie" instance=ExtResource("1_n7lsy")]
+script = ExtResource("2_fpapq")
+
+[node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("health_component", "state_machine", "hitstun_state", "origin")]
 health_component = NodePath("../HealthComponent")
+state_machine = NodePath("../StateMachine")
+hitstun_state = NodePath("../StateMachine/HitstunState")
 origin = NodePath("..")
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
@@ -30,4 +41,22 @@ scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_nq8l3")
 disabled = true
 
+[node name="HitboxComponent" parent="." index="4" node_paths=PackedStringArray("damage", "origin") instance=ExtResource("3_5s1dp")]
+damage = NodePath("DamageComponent")
+origin = NodePath("..")
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_xi0w1")
+
+[node name="StateMachine" parent="." index="5" node_paths=PackedStringArray("host") instance=ExtResource("3_4xepk")]
+host = NodePath("..")
+
+[node name="IdleStateAI" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("5_dpnef")]
+enemy = NodePath("../..")
+
+[node name="HitstunState" parent="StateMachine" index="1" node_paths=PackedStringArray("entity") instance=ExtResource("4_yx4u7")]
+entity = NodePath("../..")
+
 [editable path="HurtboxComponent"]
+[editable path="HitboxComponent"]

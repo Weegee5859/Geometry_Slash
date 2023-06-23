@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7u2fjsa70nwg"]
+
+[ext_resource type="PackedScene" uid="uid://bn2ivtwpa6gjv" path="res://Components/EntityComponents/state.tscn" id="1_oik4r"]
+[ext_resource type="Script" path="res://Components/EntityComponents/states/IdleStateAI.gd" id="2_ouwdi"]
+
+[node name="IdleStateAI" instance=ExtResource("1_oik4r")]
+script = ExtResource("2_ouwdi")

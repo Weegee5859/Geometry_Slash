@@ -12,5 +12,9 @@ func _ready():
 func _process(delta):
 	pass
 
-func takeDamage():
-	print("took damage")
+func takeDamage(damage: DamageComponent):
+	print("took damage " + str(damage.damage))
+	current_health -= damage.damage
+	
+	if current_health <= 0:
+		print("dead")
