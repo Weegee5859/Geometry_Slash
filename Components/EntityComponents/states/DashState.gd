@@ -7,6 +7,8 @@ func enterState():
 	player.hurtbox_component.disableBox()
 
 func physicsProcessState(delta):
+	if dash_trail:
+		dash_trail.enableTrail()
 	player.distance = (player.target_location - player.position)
 	player.dash_speed = player.distance / 0.07
 	player.velocity = player.dash_speed
@@ -14,10 +16,10 @@ func physicsProcessState(delta):
 	if player.distance.length() <= 5:
 		player.velocity = Vector2(0,0)
 		state_machine.changeState("idlestate")
-	if dash_trail:
-		dash_trail.enable_trail = true
+	
 
 func exitState():
+	print("exitting my lineee")
 	player.hitbox_component.disableBox()
 	player.hurtbox_component.enableBox()
-	dash_trail.enable_trail = false
+	dash_trail.disableTrail()

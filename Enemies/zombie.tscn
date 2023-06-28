@@ -31,6 +31,7 @@ health_component = NodePath("../HealthComponent")
 state_machine = NodePath("../StateMachine")
 hitstun_state = NodePath("../StateMachine/HitstunState")
 origin = NodePath("..")
+isEnemyBox = true
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 scale = Vector2(2, 2)
@@ -53,6 +54,7 @@ disabled = true
 [node name="HitboxComponent" parent="." index="4" node_paths=PackedStringArray("damage", "origin") instance=ExtResource("3_5s1dp")]
 damage = NodePath("DamageComponent")
 origin = NodePath("..")
+isEnemyBox = true
 
 [node name="CollisionShape2D" parent="HitboxComponent" index="0"]
 position = Vector2(0, -1)

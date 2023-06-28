@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://n2x4v7buc2vg"]
+[gd_scene load_steps=5 format=3 uid="uid://n2x4v7buc2vg"]
 
 [ext_resource type="PackedScene" uid="uid://dj4abotujeis2" path="res://Player/player.tscn" id="1_bmmyh"]
 [ext_resource type="PackedScene" uid="uid://glgt2gsn3dwg" path="res://Enemies/zombie.tscn" id="2_2yuse"]
+[ext_resource type="PackedScene" uid="uid://807q2fch5oe" path="res://Enemies/enemy_spawner.tscn" id="3_088hh"]
 
 [sub_resource type="Environment" id="Environment_bon2q"]
 background_mode = 3
@@ -12,8 +13,17 @@ glow_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_bmmyh")]
 position = Vector2(406, 237)
 
-[node name="Zombie" parent="." instance=ExtResource("2_2yuse")]
-position = Vector2(270, 217)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bon2q")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_088hh")]
+position = Vector2(38, 612)
+enemies = Array[PackedScene]([ExtResource("2_2yuse")])
+min_cooldown = 3
+max_cooldown = 5
+
+[node name="EnemySpawner2" parent="." instance=ExtResource("3_088hh")]
+position = Vector2(1100, 45)
+enemies = Array[PackedScene]([ExtResource("2_2yuse")])
+min_cooldown = 3
+max_cooldown = 5

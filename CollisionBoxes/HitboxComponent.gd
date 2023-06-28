@@ -15,8 +15,10 @@ func _process(delta):
 		
 		
 		if body is HurtboxComponent:
+			
 			if body.origin == origin: continue
 			if not body.active: continue
+			if body.isEnemyBox and isEnemyBox: continue
 			if body.health_component:
 				body.health_component.takeDamage(damage)
 			if body.hitstun_state and body.state_machine:

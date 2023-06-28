@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwes047yf60q0"]
+
+[ext_resource type="Texture2D" uid="uid://b1d52xv4dinc" path="res://Sprites/sword_hit.png" id="1_smemg"]
+
+[sub_resource type="Gradient" id="Gradient_78m75"]
+offsets = PackedFloat32Array(0, 0.124726, 0.258206)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y5qs4"]
+gradient = SubResource("Gradient_78m75")
+
+[sub_resource type="Curve" id="Curve_1auto"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.143443, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_dq7jv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.155738, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_bh07n"]
+curve_x = SubResource("Curve_1auto")
+curve_y = SubResource("Curve_dq7jv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jyr12"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 360.0
+scale_min = 3.0
+scale_max = 3.0
+scale_curve = SubResource("CurveXYZTexture_bh07n")
+color_ramp = SubResource("GradientTexture1D_y5qs4")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+process_material = SubResource("ParticleProcessMaterial_jyr12")
+texture = ExtResource("1_smemg")

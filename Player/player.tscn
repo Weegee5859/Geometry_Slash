@@ -93,7 +93,7 @@ shape = SubResource("RectangleShape2D_h70yl")
 debug_color = Color(0.972549, 0.141176, 0.25098, 0.419608)
 
 [node name="DamageComponent" parent="HitboxComponent" index="1"]
-damage = 10
+damage = 50
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_fn2c3")]
 
@@ -117,6 +117,7 @@ dash_trail = NodePath("../../DashLine")
 entity = NodePath("../..")
 
 [node name="DashLine" type="Line2D" parent="." node_paths=PackedStringArray("target")]
+visible = false
 width = 3.0
 width_curve = SubResource("Curve_kb3o5")
 script = ExtResource("13_q57k6")
