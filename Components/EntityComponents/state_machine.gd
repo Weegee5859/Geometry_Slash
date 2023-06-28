@@ -62,3 +62,6 @@ func addPreviousState(state: State):
 		prev_states.pop_front()
 	print("-------------------------")
 	print(prev_states)
+	
+func returnCurrentState():
+	return current_state

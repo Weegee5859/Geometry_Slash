@@ -1,5 +1,6 @@
 extends "res://Components/EntityComponents/state.gd"
 @export var player: CharacterBody2D
+@export var dash_trail: Line2D
 
 func enterState():
 	player.hitbox_component.enableBox()
@@ -13,7 +14,10 @@ func physicsProcessState(delta):
 	if player.distance.length() <= 5:
 		player.velocity = Vector2(0,0)
 		state_machine.changeState("idlestate")
+	if dash_trail:
+		dash_trail.enable_trail = true
 
 func exitState():
 	player.hitbox_component.disableBox()
 	player.hurtbox_component.enableBox()
+	dash_trail.enable_trail = false
