@@ -14,4 +14,8 @@ func physicsProcessState(delta):
 	# Move Player in direction
 	player.velocity = player.direction * player.speed
 	player.move_and_slide()
-		
+
+	
+	
+
+	

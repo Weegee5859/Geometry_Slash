@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://glgt2gsn3dwg"]
+[gd_scene load_steps=15 format=3 uid="uid://glgt2gsn3dwg"]
 
 [ext_resource type="PackedScene" uid="uid://0fqqmwll3635" path="res://Enemies/EnemyBase.tscn" id="1_n7lsy"]
 [ext_resource type="Script" path="res://Enemies/zombie.gd" id="2_fpapq"]
@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="3_5s1dp"]
 [ext_resource type="PackedScene" uid="uid://djdwprsqs57gc" path="res://Components/EntityComponents/hitstun_state.tscn" id="4_yx4u7"]
 [ext_resource type="PackedScene" uid="uid://c7u2fjsa70nwg" path="res://Components/EntityComponents/states/idle_state_ai.tscn" id="5_dpnef"]
-[ext_resource type="PackedScene" uid="uid://c4oag70xu48rw" path="res://Components/EntityComponents/states/run_state_ai.tscn" id="8_b1b84"]
+[ext_resource type="PackedScene" uid="uid://c4oag70xu48rw" path="res://Components/EntityComponents/states/run_to_player_state_ai.tscn" id="8_b1b84"]
+[ext_resource type="PackedScene" uid="uid://com8vliyfbogd" path="res://Components/EntityComponents/states/dash_attack_state_ai.tscn" id="10_n21jh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaobf"]
 
@@ -71,6 +72,10 @@ enemy = NodePath("../..")
 
 [node name="HitstunState" parent="StateMachine" index="2" node_paths=PackedStringArray("entity") instance=ExtResource("4_yx4u7")]
 entity = NodePath("../..")
+
+[node name="DashAttackStateAI" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy") instance=ExtResource("10_n21jh")]
+enemy = NodePath("../..")
+dash_speed = 400.0
 
 [editable path="HurtboxComponent"]
 [editable path="HitboxComponent"]

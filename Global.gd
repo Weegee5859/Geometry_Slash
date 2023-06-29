@@ -8,4 +8,3 @@ func addPlayer(player):
 	
 	for i in players:
 		print(player)
-		

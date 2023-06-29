@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4oag70xu48rw"]
 
 [ext_resource type="PackedScene" uid="uid://bn2ivtwpa6gjv" path="res://Components/EntityComponents/state.tscn" id="1_xvpx3"]
-[ext_resource type="Script" path="res://Components/EntityComponents/states/run_state_ai.gd" id="2_1myaa"]
+[ext_resource type="Script" path="res://Components/EntityComponents/states/run_to_player_state_ai.gd" id="2_2teiw"]
 
 [node name="RunStateAI" instance=ExtResource("1_xvpx3")]
-script = ExtResource("2_1myaa")
+script = ExtResource("2_2teiw")
+requiredDistanceToPlayer = 200
+distance_new_state = ""

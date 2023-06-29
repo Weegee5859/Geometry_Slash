@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://com8vliyfbogd"]
+
+[ext_resource type="PackedScene" uid="uid://bn2ivtwpa6gjv" path="res://Components/EntityComponents/state.tscn" id="1_58a2j"]
+[ext_resource type="Script" path="res://Components/EntityComponents/states/DashAttackStateAI.gd" id="2_c5pq6"]
+
+[node name="DashAttackStateAI" instance=ExtResource("1_58a2j")]
+script = ExtResource("2_c5pq6")
+dash_speed = 400.0
