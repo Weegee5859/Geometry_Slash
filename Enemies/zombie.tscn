@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://glgt2gsn3dwg"]
+[gd_scene load_steps=13 format=3 uid="uid://glgt2gsn3dwg"]
 
 [ext_resource type="PackedScene" uid="uid://0fqqmwll3635" path="res://Enemies/EnemyBase.tscn" id="1_n7lsy"]
 [ext_resource type="Script" path="res://Enemies/zombie.gd" id="2_fpapq"]
@@ -7,9 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dmjfih37ghqlu" path="res://Components/EntityComponents/state_machine.tscn" id="3_4xepk"]
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="3_5s1dp"]
 [ext_resource type="PackedScene" uid="uid://djdwprsqs57gc" path="res://Components/EntityComponents/hitstun_state.tscn" id="4_yx4u7"]
-[ext_resource type="PackedScene" uid="uid://c7u2fjsa70nwg" path="res://Components/EntityComponents/states/idle_state_ai.tscn" id="5_dpnef"]
 [ext_resource type="PackedScene" uid="uid://c4oag70xu48rw" path="res://Components/EntityComponents/states/run_to_player_state_ai.tscn" id="8_b1b84"]
-[ext_resource type="PackedScene" uid="uid://com8vliyfbogd" path="res://Components/EntityComponents/states/dash_attack_state_ai.tscn" id="10_n21jh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaobf"]
 
@@ -26,6 +24,7 @@ size = Vector2(40, 40)
 
 [node name="Zombie" instance=ExtResource("1_n7lsy")]
 script = ExtResource("2_fpapq")
+speed = 40
 
 [node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("health_component", "state_machine", "hitstun_state", "origin")]
 health_component = NodePath("../HealthComponent")
@@ -39,12 +38,13 @@ scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_vaobf")
 
 [node name="HealthComponent" parent="." index="1" node_paths=PackedStringArray("character")]
+max_health = 60
 character = NodePath("..")
 
 [node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_cfku4")
 position = Vector2(-1, -1)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_ggs73")
 
 [node name="CollisionShape2D" parent="." index="3"]
@@ -61,21 +61,19 @@ isEnemyBox = true
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_xi0w1")
 
+[node name="DamageComponent" parent="HitboxComponent" index="1"]
+damage = 3
+knockback = 5
+hitstun = 2
+
 [node name="StateMachine" parent="." index="5" node_paths=PackedStringArray("host") instance=ExtResource("3_4xepk")]
 host = NodePath("..")
 
 [node name="RunStateAI" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("8_b1b84")]
 enemy = NodePath("../..")
 
-[node name="IdleStateAI" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy") instance=ExtResource("5_dpnef")]
-enemy = NodePath("../..")
-
-[node name="HitstunState" parent="StateMachine" index="2" node_paths=PackedStringArray("entity") instance=ExtResource("4_yx4u7")]
+[node name="HitstunState" parent="StateMachine" index="1" node_paths=PackedStringArray("entity") instance=ExtResource("4_yx4u7")]
 entity = NodePath("../..")
-
-[node name="DashAttackStateAI" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy") instance=ExtResource("10_n21jh")]
-enemy = NodePath("../..")
-dash_speed = 400.0
 
 [editable path="HurtboxComponent"]
 [editable path="HitboxComponent"]

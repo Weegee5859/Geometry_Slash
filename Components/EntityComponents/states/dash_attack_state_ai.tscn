@@ -6,3 +6,4 @@
 [node name="DashAttackStateAI" instance=ExtResource("1_58a2j")]
 script = ExtResource("2_c5pq6")
 dash_speed = 400.0
+finished_state_new_state = ""

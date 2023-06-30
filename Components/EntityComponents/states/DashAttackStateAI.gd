@@ -4,6 +4,8 @@ extends "res://Components/EntityComponents/state.gd"
 @onready var direction: Vector2
 @onready var timer: int = 50
 @onready var default_time: int = 50
+@export var finished_state_new_state: String
+
 func enterState():
 	if direction == Vector2(0,0):
 		direction = (Global.players[0].position - enemy.position).normalized()
@@ -20,7 +22,7 @@ func physicsProcessState(delta):
 	if timer<=0:
 		timer = default_time
 		direction = Vector2(0,0)
-		state_machine.changeState("runstateai")
+		state_machine.changeState(finished_state_new_state)
 	enemy.velocity = direction * dash_speed
 	enemy.move_and_slide()
 	timer-=1

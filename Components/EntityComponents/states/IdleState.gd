@@ -1,6 +1,9 @@
 extends "res://Components/EntityComponents/state.gd"
 @export var player: CharacterBody2D
 
+func enterState():
+	player.velocity = Vector2(0,0)
+
 func physicsProcessState(delta):
 	# If you click on player, player is ready to attack
 	if Input.is_action_just_pressed("click") and player.mouse_is_on_player:
@@ -9,6 +12,17 @@ func physicsProcessState(delta):
 		#print(playerIsReadyToAttack)
 # Click anywhere that's not player
 	if Input.is_action_pressed("click") and not player.mouse_is_on_player:
-		state_machine.changeState("runState")
-	else:
-		player.velocity = Vector2(0,0)
+		# if the house is 90 units or more away from the player
+		if player.mouse_distance >= 90:
+			state_machine.changeState("runState")
+		# Otherwise, cursor is close to player
+		# So continue to idle but swing sword
+		else:			
+			player.sword_hitbox_component.active = true
+	# If your not clikcing anything disable sword hitbox
+	if not Input.is_action_pressed("click"):
+		player.sword_hitbox_component.active = false
+		
+		
+func exitState():
+	player.sword_hitbox_component.active = false

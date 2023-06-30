@@ -1,9 +1,8 @@
 extends CharacterBody2D
 
 
-@onready var hitbox_component = $HitboxComponent
+@onready var hitbox_component = $DashHitboxComponent
 @onready var hurtbox_component = $HurtboxComponent
-
 
 @onready var speed: float = 220.0
 
@@ -18,11 +17,19 @@ extends CharacterBody2D
 
 @onready var sprite = $Sprite2D
 
+@onready var sword_slash_base = $SwordSlashBase
+@onready var sword_hitbox_component = $SwordSlashBase/HitboxComponent
+
+@onready var mouse_distance: float
+
 func _ready():
 	Global.addPlayer(self)
 	
 
 func _physics_process(delta):
+	mouse_distance = (get_global_mouse_position() - position).length()	
+	sword_slash_base.rotation = get_angle_to(get_global_mouse_position())
+
 	return
 	if dash:
 		pass
@@ -30,6 +37,8 @@ func _physics_process(delta):
 		
 	if not dash:
 		pass
+		
+	
 
 			
 		

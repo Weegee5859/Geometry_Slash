@@ -4,12 +4,10 @@
 [ext_resource type="Script" path="res://CollisionBoxes/HitboxComponent.gd" id="2_px8tk"]
 [ext_resource type="PackedScene" uid="uid://b6q3atgd5rv8w" path="res://Components/EntityComponents/damage_component.tscn" id="3_7xx6k"]
 
-[node name="HitboxComponent" instance=ExtResource("1_owijx")]
+[node name="HitboxComponent" node_paths=PackedStringArray("damage") instance=ExtResource("1_owijx")]
 collision_layer = 32
 collision_mask = 64
 script = ExtResource("2_px8tk")
+damage = NodePath("")
 
 [node name="DamageComponent" parent="." index="1" instance=ExtResource("3_7xx6k")]
-damage = 1
-knockback = 1
-hitstun = 1
