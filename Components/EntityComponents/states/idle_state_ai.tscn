@@ -5,3 +5,6 @@
 
 [node name="IdleStateAI" instance=ExtResource("1_oik4r")]
 script = ExtResource("2_ouwdi")
+requiredDistanceToPlayer = 0
+requiredDistanceToPlayerNewState = ""
+distance_new_state = ""

@@ -18,11 +18,11 @@ func physicsProcessState(delta):
 		# Otherwise, cursor is close to player
 		# So continue to idle but swing sword
 		else:			
-			player.sword_hitbox_component.active = true
+			player.swordSwipe(true)
 	# If your not clikcing anything disable sword hitbox
 	if not Input.is_action_pressed("click"):
-		player.sword_hitbox_component.active = false
+		player.swordSwipe(false)
 		
 		
 func exitState():
-	player.sword_hitbox_component.active = false
+	player.swordSwipe(false)

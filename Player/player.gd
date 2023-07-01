@@ -19,43 +19,49 @@ extends CharacterBody2D
 
 @onready var sword_slash_base = $SwordSlashBase
 @onready var sword_hitbox_component = $SwordSlashBase/HitboxComponent
+@onready var sword_sprite = $SwordSlashBase/HitboxComponent/SwordSprite
+@onready var sword_animation_player = $SwordSlashBase/HitboxComponent/SwordAnimationPlayer
+@onready var can_swing: bool
 
 @onready var mouse_distance: float
 
+
+func enableSwing():
+	sword_hitbox_component.active = true
+	sword_sprite.visible = true
+	
+func disableSwing():
+	sword_hitbox_component.active = false
+	sword_sprite.visible = false
+
+	
+func swordSwipe(canAttack: bool=false):
+	if not canAttack:
+		disableSwing()
+		sword_animation_player.stop()
+		return
+	#Sword Animation
+	enableSwing()
+	if not sword_animation_player.is_playing():
+		sword_animation_player.play("sword_swipe_both")
+	#if sword_animation_player.current_animation == "sword_swipe":
+	#	if sword_animation_player.current_animation_position >= sword_animation_player.current_animation_length-0.05:
+	#		print("sword swipe 2")
+	#		sword_animation_player.play("sword_swipe_2")
+	#if not sword_animation_player.is_playing():
+	#	sword_animation_player.play("sword_swipe")
+
 func _ready():
 	Global.addPlayer(self)
+	disableSwing()
 	
 
 func _physics_process(delta):
 	mouse_distance = (get_global_mouse_position() - position).length()	
 	sword_slash_base.rotation = get_angle_to(get_global_mouse_position())
-
-	return
-	if dash:
-		pass
-
-		
-	if not dash:
-		pass
-		
 	
-
-			
-		
-		
-		
-		
-	#if Input.is_action_just_released("click"):
-		#playerIsReadyToAttack = Vector2(0,0)
-		#print(playerIsReadyToAttack)
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction = Input.get_axis("ui_left", "ui_right")
-
-	move_and_slide()
-
-
+	if can_swing:
+		pass
 
 func dashToPoint(target_locations):
 	pass

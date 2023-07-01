@@ -15,11 +15,13 @@ func enterState():
 		entity.sprite.material.set_shader_parameter("enabled", true)
 
 func physicsProcessState(delta):
+	
+		
 	var direction = (entity.position - target_pos).normalized()
 	print(direction)
 	print(hitstun_timer)
 	if entity:
-		if damage.knockback:
+		if weakref(damage).get_ref():
 			entity.velocity = direction * (100*damage.knockback)
 		hitstun_timer-=delta
 	if hitstun_timer<=0:
