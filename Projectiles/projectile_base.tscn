@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://kahrns6og4rr"]
+
+[ext_resource type="Script" path="res://Projectiles/ProjectileBase.gd" id="1_wpv2i"]
+[ext_resource type="PackedScene" uid="uid://bjgquag0s4p8w" path="res://Components/EntityComponents/health_component.tscn" id="2_ue5si"]
+[ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="3_3sxdg"]
+[ext_resource type="PackedScene" uid="uid://c8xosetoc7mpa" path="res://CollisionBoxes/hurtbox_component.tscn" id="4_01qiy"]
+
+[node name="ProjectileBase" type="CharacterBody2D"]
+script = ExtResource("1_wpv2i")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_ue5si")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_3sxdg")]
+deleteOriginOnContact = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("4_01qiy")]
+isDeflectable = false
+
+[editable path="HitboxComponent"]

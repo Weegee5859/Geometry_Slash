@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://n2x4v7buc2vg"]
+[gd_scene load_steps=7 format=3 uid="uid://n2x4v7buc2vg"]
 
 [ext_resource type="PackedScene" uid="uid://dj4abotujeis2" path="res://Player/player.tscn" id="1_bmmyh"]
 [ext_resource type="PackedScene" uid="uid://glgt2gsn3dwg" path="res://Enemies/zombie.tscn" id="2_2yuse"]
 [ext_resource type="PackedScene" uid="uid://807q2fch5oe" path="res://Enemies/enemy_spawner.tscn" id="3_088hh"]
 [ext_resource type="PackedScene" uid="uid://c5qthu5enhg8v" path="res://Enemies/dasher.tscn" id="4_n84uc"]
+[ext_resource type="PackedScene" uid="uid://c5w3nslycj8rh" path="res://Projectiles/fireball.tscn" id="5_6a72c"]
 
 [sub_resource type="Environment" id="Environment_bon2q"]
 background_mode = 3
@@ -28,3 +29,6 @@ position = Vector2(1100, 45)
 enemies = Array[PackedScene]([ExtResource("4_n84uc")])
 min_cooldown = 3
 max_cooldown = 5
+
+[node name="Fireball" parent="." instance=ExtResource("5_6a72c")]
+position = Vector2(814, 73)
