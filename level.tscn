@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://n2x4v7buc2vg"]
+[gd_scene load_steps=8 format=3 uid="uid://n2x4v7buc2vg"]
 
 [ext_resource type="PackedScene" uid="uid://dj4abotujeis2" path="res://Player/player.tscn" id="1_bmmyh"]
+[ext_resource type="PackedScene" uid="uid://bn3iqfhukx1o6" path="res://UI/player_stats.tscn" id="1_py4pb"]
 [ext_resource type="PackedScene" uid="uid://glgt2gsn3dwg" path="res://Enemies/zombie.tscn" id="2_2yuse"]
 [ext_resource type="PackedScene" uid="uid://807q2fch5oe" path="res://Enemies/enemy_spawner.tscn" id="3_088hh"]
 [ext_resource type="PackedScene" uid="uid://c5qthu5enhg8v" path="res://Enemies/dasher.tscn" id="4_n84uc"]
@@ -12,8 +13,13 @@ glow_enabled = true
 
 [node name="level" type="Node2D"]
 
+[node name="PlayerStats" parent="." instance=ExtResource("1_py4pb")]
+
+[node name="HealthBar" parent="PlayerStats/VBoxContainer" index="0" node_paths=PackedStringArray("health_component")]
+health_component = NodePath("../../../Player/HealthComponent")
+
 [node name="Player" parent="." instance=ExtResource("1_bmmyh")]
-position = Vector2(406, 237)
+position = Vector2(424, 88)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bon2q")
@@ -31,4 +37,11 @@ min_cooldown = 3
 max_cooldown = 5
 
 [node name="Fireball" parent="." instance=ExtResource("5_6a72c")]
-position = Vector2(814, 73)
+position = Vector2(888, 72)
+speed = 150
+
+[editable path="PlayerStats"]
+[editable path="Player"]
+[editable path="Player/HurtboxComponent"]
+[editable path="Player/DashHitboxComponent"]
+[editable path="Player/SwordSlashBase/HitboxComponent"]

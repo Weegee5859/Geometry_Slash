@@ -202,7 +202,6 @@ libraries = {
 health_component = NodePath("../HealthComponent")
 state_machine = NodePath("../StateMachine")
 hitstun_state = NodePath("../StateMachine/HitstunState")
-isDeflectable = false
 origin = NodePath("..")
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
@@ -212,6 +211,9 @@ shape = SubResource("RectangleShape2D_uurff")
 [node name="DashHitboxComponent" parent="." node_paths=PackedStringArray("damage", "origin") instance=ExtResource("4_hc8hj")]
 damage = NodePath("DamageComponent")
 deleteOriginOnContact = false
+can_deflect = false
+is_physical_attack = false
+is_projectile_attack = false
 active = false
 origin = NodePath("..")
 
@@ -258,6 +260,9 @@ position = Vector2(70, 0)
 rotation = 1.5708
 damage = NodePath("DamageComponent")
 deleteOriginOnContact = false
+can_deflect = false
+is_physical_attack = true
+is_projectile_attack = false
 active = false
 origin = NodePath("../..")
 

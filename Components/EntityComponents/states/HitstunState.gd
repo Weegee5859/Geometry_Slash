@@ -13,6 +13,9 @@ func enterState():
 	#hitflash
 	if entity.sprite.material.get_shader_parameter("enabled") != null:
 		entity.sprite.material.set_shader_parameter("enabled", true)
+	# Particle
+	print(self.entity)
+	Global.addParticleToWorld("hit_spark",entity.position,self)
 
 func physicsProcessState(delta):
 	

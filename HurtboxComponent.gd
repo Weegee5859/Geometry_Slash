@@ -6,6 +6,16 @@ class_name HurtboxComponent
 
 @export var isDeflectable: bool
 
+@export var is_invincible_to_physical_attacks: bool
+@export var is_invincible_to_projectile_attacks: bool
+
+
+func setProjectileInvincibility(status: bool):
+	is_invincible_to_projectile_attacks = status
+	
+func setPhysicalAttackInvincibility(status: bool):
+	is_invincible_to_physical_attacks = status
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

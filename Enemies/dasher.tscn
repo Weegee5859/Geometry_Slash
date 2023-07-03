@@ -63,6 +63,10 @@ entity = NodePath("../..")
 
 [node name="HitboxComponent" parent="." index="5" node_paths=PackedStringArray("damage", "origin") instance=ExtResource("7_nl43w")]
 damage = NodePath("DamageComponent")
+deleteOriginOnContact = false
+can_deflect = false
+is_physical_attack = true
+is_projectile_attack = false
 origin = NodePath("..")
 isEnemyBox = true
 

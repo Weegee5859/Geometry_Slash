@@ -4,7 +4,8 @@ extends "res://Components/EntityComponents/state.gd"
 
 func enterState():
 	player.hitbox_component.enableBox()
-	player.hurtbox_component.disableBox()
+	#player.hurtbox_component.disableBox()
+	player.hurtbox_component.setPhysicalAttackInvincibility(true)
 
 func physicsProcessState(delta):
 	if dash_trail:
@@ -21,5 +22,6 @@ func physicsProcessState(delta):
 func exitState():
 	print("exitting my lineee")
 	player.hitbox_component.disableBox()
-	player.hurtbox_component.enableBox()
+	#player.hurtbox_component.enableBox()
+	player.hurtbox_component.setPhysicalAttackInvincibility(false)
 	dash_trail.disableTrail()

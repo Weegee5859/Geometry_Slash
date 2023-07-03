@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnw6ci72o8j5l"]
+
+[ext_resource type="PackedScene" uid="uid://in15ef8uw25a" path="res://Particles/ParticleBase.tscn" id="1_61eag"]
+[ext_resource type="Texture2D" uid="uid://cpj3u6f4wfsgo" path="res://Sprites/hit_spark_sprite_sheet.png" id="2_nff0n"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pge4q"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_52bbn"]
+offsets = PackedFloat32Array(0, 0.704595, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v5s3a"]
+gradient = SubResource("Gradient_52bbn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_84eui"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 360.0
+scale_min = 4.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_v5s3a")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="HitSparkParticle" instance=ExtResource("1_61eag")]
+
+[node name="GPUParticles2D" parent="." index="0"]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_pge4q")
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_84eui")
+texture = ExtResource("2_nff0n")
+lifetime = 0.2

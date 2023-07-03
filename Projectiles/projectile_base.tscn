@@ -12,10 +12,18 @@ script = ExtResource("1_wpv2i")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_3sxdg")]
 deleteOriginOnContact = false
+can_deflect = false
+is_physical_attack = false
+is_projectile_attack = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("4_01qiy")]
-isDeflectable = false
+
+[node name="MouseClickArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseClickArea2D"]
+
+[connection signal="input_event" from="MouseClickArea2D" to="." method="_on_mouse_click_area_2d_input_event"]
 
 [editable path="HitboxComponent"]
