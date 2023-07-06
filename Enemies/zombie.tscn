@@ -38,7 +38,7 @@ scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_vaobf")
 
 [node name="HealthComponent" parent="." index="1" node_paths=PackedStringArray("character")]
-max_health = 60
+max_health = 30
 character = NodePath("..")
 
 [node name="Sprite2D" parent="." index="2"]
@@ -54,10 +54,7 @@ disabled = true
 
 [node name="HitboxComponent" parent="." index="4" node_paths=PackedStringArray("damage", "origin") instance=ExtResource("3_5s1dp")]
 damage = NodePath("DamageComponent")
-deleteOriginOnContact = false
-can_deflect = false
 is_physical_attack = true
-is_projectile_attack = false
 origin = NodePath("..")
 isEnemyBox = true
 

@@ -8,8 +8,7 @@ func _ready():
 		state_machine = get_parent()
 	else:
 		print("State: State Machine is not parent, deleting..." + str(self.name))
-		queue_free()
-		
+		queue_free()		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

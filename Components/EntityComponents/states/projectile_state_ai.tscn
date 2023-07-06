@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://co8m7p2d3ujo5"]
+
+[ext_resource type="PackedScene" uid="uid://bn2ivtwpa6gjv" path="res://Components/EntityComponents/state.tscn" id="1_pocp3"]
+[ext_resource type="Script" path="res://Components/EntityComponents/states/projectile_state_ai.gd" id="2_2t4bi"]
+
+[node name="ProjectileStateAI" instance=ExtResource("1_pocp3")]
+script = ExtResource("2_2t4bi")
+amount_of_projectiles = 0
+projectile_name = ""
+projectile_rate = 0.0
+next_state = ""

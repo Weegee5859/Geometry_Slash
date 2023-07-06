@@ -7,11 +7,11 @@ extends CharacterBody2D
 @onready var hurtbox_component = $HurtboxComponent
 @onready var mouse_colliding: bool
 @onready var sprite_2d = $Sprite2D
-@onready var deflectable_range: float = 150
+@onready var deflectable_range: float = 215
 
 
 func _ready():
-	direction = Vector2(-1,0)
+	pass
 	
 func distanceToPlayer():
 	var distance = (Global.players[0].position - self.position).length()

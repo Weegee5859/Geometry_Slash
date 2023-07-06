@@ -11,10 +11,6 @@ script = ExtResource("1_wpv2i")
 [node name="HealthComponent" parent="." instance=ExtResource("2_ue5si")]
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_3sxdg")]
-deleteOriginOnContact = false
-can_deflect = false
-is_physical_attack = false
-is_projectile_attack = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

@@ -5,7 +5,7 @@ class_name MoveState
 # Player within Range
 @export var requiredDistanceToPlayer: int = 0
 @export var requiredDistanceToPlayerNewState: String
-@export var distance_new_state: String
+#@export var distance_new_state: String
 
 func physicsProcessState(delta):
 	pass

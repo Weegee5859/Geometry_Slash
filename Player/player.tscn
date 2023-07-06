@@ -206,10 +206,6 @@ shape = SubResource("RectangleShape2D_uurff")
 
 [node name="DashHitboxComponent" parent="." node_paths=PackedStringArray("damage", "origin") instance=ExtResource("4_hc8hj")]
 damage = NodePath("DamageComponent")
-deleteOriginOnContact = false
-can_deflect = false
-is_physical_attack = false
-is_projectile_attack = false
 active = false
 origin = NodePath("..")
 
@@ -219,7 +215,7 @@ shape = SubResource("RectangleShape2D_h70yl")
 debug_color = Color(0.972549, 0.141176, 0.25098, 0.419608)
 
 [node name="DamageComponent" parent="DashHitboxComponent" index="1"]
-damage = 50
+damage = 20
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_fn2c3")]
 
@@ -255,10 +251,7 @@ target = NodePath("..")
 position = Vector2(70, 0)
 rotation = 1.5708
 damage = NodePath("DamageComponent")
-deleteOriginOnContact = false
-can_deflect = false
 is_physical_attack = true
-is_projectile_attack = false
 active = false
 origin = NodePath("../..")
 

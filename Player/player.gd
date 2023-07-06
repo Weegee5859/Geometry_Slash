@@ -16,6 +16,7 @@ extends CharacterBody2D
 @onready var dash_speed: Vector2
 @export var maximum_dashes: int = 3
 @onready var current_dashes: int
+@onready var got_kill: bool
 
 @onready var sprite = $Sprite2D
 
@@ -61,7 +62,6 @@ func _ready():
 func _physics_process(delta):
 	mouse_distance = (get_global_mouse_position() - position).length()	
 	sword_slash_base.rotation = get_angle_to(get_global_mouse_position())
-	
 	if can_swing:
 		pass
 

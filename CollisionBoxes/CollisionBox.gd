@@ -2,7 +2,7 @@ extends Area2D
 class_name CollisionBox
 @export var active: bool = true
 @export var origin: CharacterBody2D
-@export var original_origin: CharacterBody2D = origin
+@onready var original_origin: CharacterBody2D = origin
 @export var isEnemyBox: bool
 
 # Called when the node enters the scene tree for the first time.

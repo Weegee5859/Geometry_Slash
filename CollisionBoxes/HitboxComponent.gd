@@ -35,7 +35,7 @@ func _process(delta):
 			# If the hurtbox component is connect to a health component
 			# take damage
 			if body.health_component:
-				body.health_component.takeDamage(damage)
+				body.health_component.takeDamage(damage,self.origin)
 			# If the hitstun state and state machine is connected to the
 			# hurtbox state, then send hitstun datas
 			if body.hitstun_state and body.state_machine:

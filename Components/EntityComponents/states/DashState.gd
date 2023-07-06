@@ -29,6 +29,9 @@ func physicsProcessState(delta):
 
 func exitState():
 	print("exitting my lineee")
+	if player.got_kill:
+		player.incrementDashAmount()
+		player.got_kill = false
 	player.hitbox_component.disableBox()
 	#player.hurtbox_component.enableBox()
 	player.hurtbox_component.setPhysicalAttackInvincibility(false)

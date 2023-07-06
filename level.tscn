@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://glgt2gsn3dwg" path="res://Enemies/zombie.tscn" id="2_2yuse"]
 [ext_resource type="PackedScene" uid="uid://807q2fch5oe" path="res://Enemies/enemy_spawner.tscn" id="3_088hh"]
 [ext_resource type="PackedScene" uid="uid://c5qthu5enhg8v" path="res://Enemies/dasher.tscn" id="4_n84uc"]
-[ext_resource type="PackedScene" uid="uid://c5w3nslycj8rh" path="res://Projectiles/fireball.tscn" id="5_6a72c"]
+[ext_resource type="PackedScene" uid="uid://xj81a4iflaof" path="res://Enemies/fire_zombie.tscn" id="7_20o1l"]
 
 [sub_resource type="Environment" id="Environment_bon2q"]
 background_mode = 3
@@ -28,20 +28,24 @@ position = Vector2(424, 88)
 environment = SubResource("Environment_bon2q")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_088hh")]
-position = Vector2(38, 612)
-enemies = Array[PackedScene]([ExtResource("2_2yuse")])
-min_cooldown = 3
-max_cooldown = 5
+position = Vector2(565, 667)
+enemies = Array[PackedScene]([ExtResource("2_2yuse"), ExtResource("7_20o1l")])
+min_cooldown = 5
+max_cooldown = 9
+offset_x = 250
 
 [node name="EnemySpawner2" parent="." instance=ExtResource("3_088hh")]
-position = Vector2(1100, 45)
-enemies = Array[PackedScene]([ExtResource("4_n84uc")])
-min_cooldown = 3
-max_cooldown = 5
+position = Vector2(610, -24)
+enemies = Array[PackedScene]([ExtResource("4_n84uc"), ExtResource("2_2yuse")])
+min_cooldown = 8
+max_cooldown = 12
+offset_x = 250
 
-[node name="Fireball" parent="." instance=ExtResource("5_6a72c")]
-position = Vector2(888, 72)
-speed = 150
+[node name="Zombie" parent="." instance=ExtResource("2_2yuse")]
+position = Vector2(303, 354)
+
+[node name="Fire_Zombie" parent="." instance=ExtResource("7_20o1l")]
+position = Vector2(114, 196)
 
 [editable path="PlayerStats"]
 [editable path="Player"]

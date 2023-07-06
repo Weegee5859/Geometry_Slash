@@ -7,7 +7,8 @@ class_name HitstunState
 
 func enterState():
 	# Init hitstun Timer
-	hitstun_timer = damage.hitstun * 5
+	if weakref(damage).get_ref():
+		hitstun_timer = damage.hitstun * 5
 	
 	entity.hurtbox_component.disableBox()
 	#hitflash

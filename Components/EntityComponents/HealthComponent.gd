@@ -13,9 +13,15 @@ func _ready():
 func _process(delta):
 	pass
 
-func takeDamage(damage: DamageComponent):
-	print("took damage " + str(damage.damage))
+func takeDamage(damage: DamageComponent,damage_origin: CharacterBody2D=null):
+	print("took damage " + str(damage.damage) + " from " + str(damage_origin.name))
 	current_health -= damage.damage
 	
 	if current_health <= 0 and character:
-		character.queue_free()
+		die(damage_origin)
+		
+func die(cause_of_death: CharacterBody2D = null):
+	if cause_of_death:
+		if "got_kill" in cause_of_death:
+			cause_of_death.got_kill = true
+	character.queue_free()
