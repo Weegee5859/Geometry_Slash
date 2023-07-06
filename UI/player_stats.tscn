@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bn3iqfhukx1o6"]
 
 [ext_resource type="Script" path="res://UI/HealthBar.gd" id="1_pbde2"]
-[ext_resource type="Texture2D" uid="uid://b1d52xv4dinc" path="res://Sprites/sword_hit.png" id="2_7gy0a"]
+[ext_resource type="Script" path="res://UI/DashContainer.gd" id="2_lbp8b"]
 
 [node name="PlayerStats" type="Control"]
 layout_mode = 3
@@ -20,17 +20,6 @@ offset_bottom = 47.0
 layout_mode = 2
 script = ExtResource("1_pbde2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="DashContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_7gy0a")
-
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_7gy0a")
-
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_7gy0a")
+script = ExtResource("2_lbp8b")

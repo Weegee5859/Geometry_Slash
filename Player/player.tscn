@@ -189,10 +189,6 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_dg0lh")
 debug_color = Color(0.172549, 0.619608, 0.494118, 0.419608)
 
-[node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_peo8d")
@@ -270,7 +266,7 @@ origin = NodePath("../..")
 shape = SubResource("RectangleShape2D_avmiq")
 
 [node name="DamageComponent" parent="SwordSlashBase/HitboxComponent" index="1"]
-damage = 2
+damage = 4
 knockback = 4
 
 [node name="SwordSprite" type="Sprite2D" parent="SwordSlashBase/HitboxComponent"]

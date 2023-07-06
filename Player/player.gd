@@ -14,6 +14,8 @@ extends CharacterBody2D
 @onready var direction: Vector2
 @onready var distance: Vector2
 @onready var dash_speed: Vector2
+@export var maximum_dashes: int = 3
+@onready var current_dashes: int
 
 @onready var sprite = $Sprite2D
 
@@ -69,6 +71,25 @@ func dashToPoint(target_locations):
 	
 func returnDirectionToMouse():
 	distance = (get_global_mouse_position() - position)
+	
+func deincrementDashAmount():
+	current_dashes -= 1
+	if current_dashes < 0:
+		current_dashes = 0
+	
+
+func incrementDashAmount():
+	current_dashes += 1
+	if current_dashes >= maximum_dashes:
+		current_dashes = maximum_dashes
+	
+func outOfDashes():
+	if current_dashes <= 0:
+		return true
+	return false
+	
+func resetDashes():
+	current_dashes = maximum_dashes
 
 func _on_area_2d_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
