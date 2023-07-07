@@ -4,14 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="2_5mpyi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rc6v"]
-size = Vector2(18, 22)
+size = Vector2(72, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71dlb"]
+size = Vector2(148, 132)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8gnl"]
-size = Vector2(52, 55)
+size = Vector2(219, 193)
 
 [node name="Fireball" instance=ExtResource("1_sgdyo")]
+scale = Vector2(0.5, 0.5)
 speed = 225
 
 [node name="HitboxComponent" parent="." index="1" node_paths=PackedStringArray("damage", "origin")]
@@ -22,14 +24,14 @@ origin = NodePath("..")
 isEnemyBox = true
 
 [node name="CollisionShape2D" parent="HitboxComponent" index="0"]
-position = Vector2(-1, -1)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_7rc6v")
 
 [node name="DamageComponent" parent="HitboxComponent" index="1"]
 damage = 15
 
 [node name="Sprite2D" parent="." index="2"]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.5, 0.5)
 skew = 0.349066
 texture = ExtResource("2_5mpyi")
 
@@ -39,10 +41,10 @@ origin = NodePath("..")
 isEnemyBox = true
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_71dlb")
 
 [node name="CollisionShape2D" parent="MouseClickArea2D" index="0"]
-position = Vector2(-1, 1.5)
 shape = SubResource("RectangleShape2D_v8gnl")
 
 [editable path="HitboxComponent"]

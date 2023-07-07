@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="8_nny4h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpser"]
-size = Vector2(69, 70)
+size = Vector2(248, 247)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jalx7"]
 resource_local_to_scene = true
@@ -19,7 +19,7 @@ shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gx2p8"]
-size = Vector2(60, 60)
+size = Vector2(234, 237)
 
 [node name="Fire_Zombie" instance=ExtResource("1_rdtc8")]
 
@@ -31,7 +31,7 @@ origin = NodePath("..")
 isEnemyBox = true
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
-position = Vector2(-0.5, 1)
+scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_kpser")
 
 [node name="HealthComponent" parent="." index="1" node_paths=PackedStringArray("character")]
@@ -68,7 +68,7 @@ origin = NodePath("..")
 isEnemyBox = true
 
 [node name="CollisionShape2D" parent="HitboxComponent" index="0"]
-position = Vector2(0, -1)
+scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_gx2p8")
 
 [node name="DamageComponent" parent="HitboxComponent" index="1"]

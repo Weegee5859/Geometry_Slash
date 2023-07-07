@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c4oag70xu48rw" path="res://Components/EntityComponents/states/run_to_player_state_ai.tscn" id="8_b1b84"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaobf"]
+size = Vector2(115.5, 113.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cfku4"]
 resource_local_to_scene = true
@@ -18,9 +19,10 @@ shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nq8l3"]
+size = Vector2(115, 116)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xi0w1"]
-size = Vector2(40, 40)
+size = Vector2(122, 124)
 
 [node name="Zombie" instance=ExtResource("1_n7lsy")]
 script = ExtResource("2_fpapq")
@@ -34,7 +36,7 @@ origin = NodePath("..")
 isEnemyBox = true
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
-scale = Vector2(2, 2)
+scale = Vector2(0.6, 0.6)
 shape = SubResource("RectangleShape2D_vaobf")
 
 [node name="HealthComponent" parent="." index="1" node_paths=PackedStringArray("character")]
@@ -43,12 +45,11 @@ character = NodePath("..")
 
 [node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_cfku4")
-position = Vector2(-1, -1)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_ggs73")
 
 [node name="CollisionShape2D" parent="." index="3"]
-scale = Vector2(2, 2)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_nq8l3")
 disabled = true
 
@@ -59,7 +60,7 @@ origin = NodePath("..")
 isEnemyBox = true
 
 [node name="CollisionShape2D" parent="HitboxComponent" index="0"]
-position = Vector2(0, -1)
+scale = Vector2(0.6, 0.6)
 shape = SubResource("RectangleShape2D_xi0w1")
 
 [node name="DamageComponent" parent="HitboxComponent" index="1"]

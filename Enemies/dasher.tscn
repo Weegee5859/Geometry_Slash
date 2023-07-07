@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="7_nl43w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbvyt"]
-size = Vector2(143, 140)
+size = Vector2(174, 175)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8edrl"]
 resource_local_to_scene = true
@@ -20,10 +20,9 @@ shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_se83t"]
-size = Vector2(116.667, 110)
+size = Vector2(177, 179)
 
 [node name="Dasher" instance=ExtResource("1_53cy7")]
-scale = Vector2(0.3, 0.3)
 script = ExtResource("2_d2f22")
 
 [node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("health_component", "state_machine", "hitstun_state", "origin")]
@@ -34,7 +33,7 @@ origin = NodePath("..")
 isEnemyBox = true
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
-position = Vector2(-1.5, -1)
+scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_hbvyt")
 
 [node name="HealthComponent" parent="." index="1" node_paths=PackedStringArray("character")]
@@ -43,6 +42,7 @@ character = NodePath("..")
 
 [node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_8edrl")
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_gj18w")
 
 [node name="StateMachine" parent="." index="4" node_paths=PackedStringArray("host") instance=ExtResource("3_myfoq")]
@@ -63,15 +63,12 @@ entity = NodePath("../..")
 
 [node name="HitboxComponent" parent="." index="5" node_paths=PackedStringArray("damage", "origin") instance=ExtResource("7_nl43w")]
 damage = NodePath("DamageComponent")
-deleteOriginOnContact = false
-can_deflect = false
 is_physical_attack = true
-is_projectile_attack = false
 origin = NodePath("..")
 isEnemyBox = true
 
 [node name="CollisionShape2D" parent="HitboxComponent" index="0"]
-position = Vector2(-1.66667, -1.66667)
+scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_se83t")
 
 [node name="DamageComponent" parent="HitboxComponent" index="1"]

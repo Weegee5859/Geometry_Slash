@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
 
-@export var speed: int = 50
+@export var speed: int = 75
 @export var direction: Vector2
 @onready var hitbox_component = $HitboxComponent
 @onready var hurtbox_component = $HurtboxComponent
 @onready var mouse_colliding: bool
 @onready var sprite_2d = $Sprite2D
-@onready var deflectable_range: float = 250
+@onready var deflectable_range: float = 350
 
 
 func _ready():
