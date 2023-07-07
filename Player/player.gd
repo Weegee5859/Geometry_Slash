@@ -28,6 +28,7 @@ extends CharacterBody2D
 
 @onready var mouse_distance: float
 
+@onready var dash_indicator = $DashIndicator
 
 func enableSwing():
 	sword_hitbox_component.active = true
@@ -57,6 +58,8 @@ func swordSwipe(canAttack: bool=false):
 func _ready():
 	Global.addPlayer(self)
 	disableSwing()
+	dash_indicator.add_point(self.global_position)
+	dash_indicator.add_point(get_global_mouse_position())
 	
 
 func _physics_process(delta):
@@ -64,6 +67,7 @@ func _physics_process(delta):
 	sword_slash_base.rotation = get_angle_to(get_global_mouse_position())
 	if can_swing:
 		pass
+	
 
 func dashToPoint(target_locations):
 	pass

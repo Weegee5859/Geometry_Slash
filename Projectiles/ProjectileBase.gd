@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var hurtbox_component = $HurtboxComponent
 @onready var mouse_colliding: bool
 @onready var sprite_2d = $Sprite2D
-@onready var deflectable_range: float = 215
+@onready var deflectable_range: float = 250
 
 
 func _ready():
@@ -50,12 +50,11 @@ func _on_mouse_click_area_2d_input_event(viewport, event, shape_idx):
 	if Input.is_action_just_pressed("click"):
 		if distanceToPlayer() >= deflectable_range: return
 		var new_origin = Global.players[0]
-		
 		if hurtbox_component.isEnemyBox == true:
 			# Make projectile go in opposite direction
-			hurtbox_component.origin.direction *= -1
+			hurtbox_component.origin.direction = (get_global_mouse_position() - Global.players[0].position).normalized()
 			# Increase Projectile speed by 1.5
-			hurtbox_component.origin.speed *= 1.5
+			hurtbox_component.origin.speed *= 2
 			changeEnemyBoxes(false)
 			# If projectile no longer belongs to enemy, change color
 			sprite_2d.modulate = Color(0.1,0.2,0.7,1)

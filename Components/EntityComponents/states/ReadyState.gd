@@ -1,5 +1,9 @@
 extends "res://Components/EntityComponents/state.gd"
 @export var player: CharacterBody2D
+@export var dash_indicator: Line2D
+
+func enterState():
+	dash_indicator.visible = true
 
 func physicsProcessState(delta):
 	if not Input.is_action_pressed("click"):
@@ -15,3 +19,6 @@ func physicsProcessState(delta):
 		print(player.target_location)
 		player.direction = (player.target_location - player.position).normalized()
 		state_machine.changeState("dashState")
+
+func exitState():
+	dash_indicator.visible = false
