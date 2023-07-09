@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dwyu7la2i0s2h" path="res://Sprites/player.png" id="2_thnww"]
 
 [sub_resource type="Gradient" id="Gradient_i0os1"]
-offsets = PackedFloat32Array(0, 0.146608, 0.778993)
+offsets = PackedFloat32Array(0, 0.522976, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ng7pg"]

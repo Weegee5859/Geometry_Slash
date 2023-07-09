@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjnjcggkfeho7"]
+
+[ext_resource type="PackedScene" uid="uid://kahrns6og4rr" path="res://Projectiles/projectile_base.tscn" id="1_xyfl8"]
+[ext_resource type="Texture2D" uid="uid://bpcosvpyidis3" path="res://Sprites/bullet_blaster.png" id="2_xne38"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mm83k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1owhx"]
+size = Vector2(60, 60)
+
+[node name="TrainingProjectile" instance=ExtResource("1_xyfl8")]
+direction = Vector2(-1, 0)
+
+[node name="HealthComponent" parent="." index="0" node_paths=PackedStringArray("character")]
+max_health = 2
+character = NodePath("..")
+death_particle_effect = "fireball_explosion"
+
+[node name="HitboxComponent" parent="." index="1" node_paths=PackedStringArray("damage", "origin")]
+damage = NodePath("DamageComponent")
+deleteOriginOnContact = true
+can_deflect = true
+is_projectile_attack = true
+origin = NodePath("..")
+isEnemyBox = true
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("RectangleShape2D_mm83k")
+
+[node name="DamageComponent" parent="HitboxComponent" index="1"]
+damage = 0
+knockback = 3
+
+[node name="Sprite2D" parent="." index="2"]
+texture_filter = 1
+texture = ExtResource("2_xne38")
+
+[node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("origin")]
+origin = NodePath("..")
+isEnemyBox = true
+
+[node name="CollisionShape2D" parent="MouseClickArea2D" index="0"]
+shape = SubResource("RectangleShape2D_1owhx")
+
+[editable path="HitboxComponent"]

@@ -27,7 +27,7 @@ size = Vector2(122, 124)
 
 [node name="Zombie" instance=ExtResource("1_n7lsy")]
 script = ExtResource("2_fpapq")
-speed = 55
+speed = 60
 
 [node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("health_component", "state_machine", "hitstun_state", "origin")]
 health_component = NodePath("../HealthComponent")
@@ -82,6 +82,7 @@ requiredDistanceToPlayerNewState = null
 
 [node name="HitstunState" parent="StateMachine" index="1" node_paths=PackedStringArray("entity") instance=ExtResource("4_yx4u7")]
 entity = NodePath("../..")
+knockback_resistent = false
 
 [node name="Glow" parent="." index="6" instance=ExtResource("9_vc12m")]
 scale = Vector2(0.4, 0.4)

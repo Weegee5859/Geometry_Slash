@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqeuyo0gauuqp"]
+
+[ext_resource type="Texture2D" uid="uid://bvlk6a4cncis5" path="res://Sprites/floor.png" id="1_quwvj"]
+
+[node name="Floor" type="Sprite2D"]
+position = Vector2(660, 376)
+scale = Vector2(42.25, 24.5)
+texture = ExtResource("1_quwvj")

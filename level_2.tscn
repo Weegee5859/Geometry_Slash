@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cptd1436f2k32"]
+[gd_scene load_steps=4 format=3 uid="uid://cptd1436f2k32"]
 
 [ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="1_yr4ti"]
 [ext_resource type="Texture2D" uid="uid://bggt3bl1g11qk" path="res://Sprites/light.png" id="2_4pfnh"]
+[ext_resource type="PackedScene" uid="uid://dj4abotujeis2" path="res://Player/player.tscn" id="3_vubx1"]
 
 [node name="level2" type="Node2D"]
 
@@ -25,3 +26,5 @@ texture = ExtResource("1_yr4ti")
 [node name="PointLight2D" type="PointLight2D" parent="Sprite2D2"]
 position = Vector2(8, 0)
 texture = ExtResource("2_4pfnh")
+
+[node name="Player" parent="." instance=ExtResource("3_vubx1")]

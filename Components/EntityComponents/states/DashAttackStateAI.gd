@@ -7,8 +7,8 @@ extends "res://Components/EntityComponents/state.gd"
 @export var finished_state_new_state: String
 
 func enterState():
-	if direction == Vector2(0,0):
-		direction = (Global.players[0].position - enemy.position).normalized()
+	#if direction == Vector2(0,0):
+	direction = (Global.players[0].position - enemy.position).normalized()
 	
 func exitState():
 	pass
@@ -21,7 +21,7 @@ func physicsProcessState(delta):
 	print(timer)
 	if timer<=0:
 		timer = default_time
-		direction = Vector2(0,0)
+		#direction = Vector2(0,0)
 		state_machine.changeState(finished_state_new_state)
 	enemy.velocity = direction * dash_speed
 	enemy.move_and_slide()

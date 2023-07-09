@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dj4abotujeis2"]
+[gd_scene load_steps=33 format=3 uid="uid://dj4abotujeis2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4cu8s"]
 [ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="2_usk50"]
@@ -47,9 +47,6 @@ size = Vector2(273, 266)
 [sub_resource type="Curve" id="Curve_kb3o5"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.627706, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_g7fon"]
-colors = PackedColorArray(0, 1, 1, 1, 0, 1, 1, 0.509804)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avmiq"]
 size = Vector2(97, 29)
@@ -223,6 +220,7 @@ debug_color = Color(0.972549, 0.141176, 0.25098, 0.419608)
 
 [node name="DamageComponent" parent="DashHitboxComponent" index="1"]
 damage = 15
+knockback = 0
 hitstun = 2
 
 [node name="AudioHit" parent="DashHitboxComponent" index="2"]
@@ -250,10 +248,11 @@ dash_trail = NodePath("../../DashLine")
 
 [node name="HitstunState" parent="StateMachine" node_paths=PackedStringArray("entity") instance=ExtResource("11_mhhc2")]
 entity = NodePath("../..")
+knockback_resistent = false
 
 [node name="DashLine" type="Line2D" parent="." node_paths=PackedStringArray("target")]
 visible = false
-width = 3.0
+width = 5.0
 width_curve = SubResource("Curve_kb3o5")
 script = ExtResource("13_q57k6")
 target = NodePath("..")
@@ -261,8 +260,6 @@ target = NodePath("..")
 [node name="DashIndicator" type="Line2D" parent="." node_paths=PackedStringArray("target")]
 visible = false
 width = 3.0
-default_color = Color(0.27451, 1, 0.917647, 1)
-gradient = SubResource("Gradient_g7fon")
 script = ExtResource("14_mqomw")
 target = NodePath("..")
 

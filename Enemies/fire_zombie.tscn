@@ -23,6 +23,7 @@ shader_parameter/tint = Color(1, 1, 1, 1)
 size = Vector2(234, 237)
 
 [node name="Fire_Zombie" instance=ExtResource("1_rdtc8")]
+speed = 25
 
 [node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("health_component", "state_machine", "hitstun_state", "origin")]
 health_component = NodePath("../HealthComponent")
@@ -36,7 +37,7 @@ scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_kpser")
 
 [node name="HealthComponent" parent="." index="1" node_paths=PackedStringArray("character")]
-max_health = 15
+max_health = 8
 character = NodePath("..")
 
 [node name="Sprite2D" parent="." index="2"]
@@ -61,6 +62,7 @@ projectile_rate = 200.0
 
 [node name="HitstunState" parent="StateMachine" index="2" node_paths=PackedStringArray("entity") instance=ExtResource("6_p50lx")]
 entity = NodePath("../..")
+knockback_resistent = false
 
 [node name="HitboxComponent" parent="." index="5" node_paths=PackedStringArray("damage", "origin") instance=ExtResource("8_nny4h")]
 damage = NodePath("DamageComponent")

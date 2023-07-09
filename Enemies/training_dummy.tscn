@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://b5cehfyt4cen5"]
+
+[ext_resource type="PackedScene" uid="uid://0fqqmwll3635" path="res://Enemies/EnemyBase.tscn" id="1_apud4"]
+[ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="2_542gg"]
+[ext_resource type="Texture2D" uid="uid://2qu0cql5n8gf" path="res://Sprites/zombie.png" id="3_swauw"]
+[ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="4_551r3"]
+[ext_resource type="Script" path="res://Components/EntityComponents/state_machine.gd" id="5_yhhfr"]
+[ext_resource type="PackedScene" uid="uid://c7u2fjsa70nwg" path="res://Components/EntityComponents/states/idle_state_ai.tscn" id="6_s6r5f"]
+[ext_resource type="Script" path="res://Components/EntityComponents/states/HitstunState.gd" id="7_kifqd"]
+[ext_resource type="FontFile" uid="uid://dwsjcsp668u1n" path="res://UI/Fonts/ARCADECLASSIC.TTF" id="8_gb8nc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w44ix"]
+size = Vector2(74, 71)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3oyd"]
+resource_local_to_scene = true
+shader = ExtResource("2_542gg")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpnrv"]
+size = Vector2(62, 62)
+
+[node name="TrainingDummy" instance=ExtResource("1_apud4")]
+
+[node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("state_machine", "hitstun_state", "origin")]
+state_machine = NodePath("../StateMachine")
+hitstun_state = NodePath("../StateMachine/HitstunState")
+origin = NodePath("..")
+isEnemyBox = true
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_w44ix")
+
+[node name="HealthComponent" parent="." index="1"]
+max_health = 999
+
+[node name="Sprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_w3oyd")
+scale = Vector2(2, 2)
+texture = ExtResource("3_swauw")
+
+[node name="HitboxComponent" parent="." index="4" node_paths=PackedStringArray("damage", "origin") instance=ExtResource("4_551r3")]
+damage = NodePath("DamageComponent")
+is_physical_attack = true
+origin = NodePath("..")
+isEnemyBox = true
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("RectangleShape2D_vpnrv")
+
+[node name="DamageComponent" parent="HitboxComponent" index="1"]
+damage = 0
+knockback = 3
+
+[node name="StateMachine" type="Node2D" parent="." index="5" node_paths=PackedStringArray("host")]
+script = ExtResource("5_yhhfr")
+host = NodePath("..")
+
+[node name="IdleStateAI" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("6_s6r5f")]
+enemy = NodePath("../..")
+
+[node name="HitstunState" type="Node2D" parent="StateMachine" index="1" node_paths=PackedStringArray("entity")]
+script = ExtResource("7_kifqd")
+entity = NodePath("../..")
+knockback_resistent = true
+
+[node name="Label" type="Label" parent="." index="6"]
+offset_left = -33.0
+offset_top = -64.0
+offset_right = 32.0
+offset_bottom = -36.0
+theme_override_fonts/font = ExtResource("8_gb8nc")
+theme_override_font_sizes/font_size = 24
+text = "Enemy"
+
+[editable path="HurtboxComponent"]
+[editable path="HitboxComponent"]

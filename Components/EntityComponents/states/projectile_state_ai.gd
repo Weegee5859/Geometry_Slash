@@ -7,7 +7,7 @@ extends "res://Components/EntityComponents/state.gd"
 @export var next_state: String
 @export var projectile_rate: float
 @onready var projectile_rate_timer: float = 0
-@onready var cooldown_default: int = 50
+@onready var cooldown_default: int = 65
 @onready var current_cooldown: int = 0
 @onready var init_projectile_position_offset: float = 65
 

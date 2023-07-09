@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5w3nslycj8rh"]
+[gd_scene load_steps=8 format=3 uid="uid://c5w3nslycj8rh"]
 
 [ext_resource type="PackedScene" uid="uid://kahrns6og4rr" path="res://Projectiles/projectile_base.tscn" id="1_sgdyo"]
-[ext_resource type="AudioStream" uid="uid://b5d7bcubi35yr" path="res://Audio/fireball_impact.mp3" id="2_p1nsr"]
 [ext_resource type="Texture2D" uid="uid://bpcosvpyidis3" path="res://Sprites/bullet_blaster.png" id="2_sq0iq"]
 [ext_resource type="PackedScene" uid="uid://b63y2la3cys7" path="res://Shaders/glow.tscn" id="3_su886"]
 [ext_resource type="AudioStream" uid="uid://bjj2nejcjege8" path="res://Audio/fireball_shot.mp3" id="4_ur8ms"]
@@ -13,10 +12,14 @@ size = Vector2(72, 102)
 size = Vector2(148, 132)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8gnl"]
-size = Vector2(219, 193)
+size = Vector2(120, 116)
 
 [node name="Fireball" instance=ExtResource("1_sgdyo")]
 speed = 225
+
+[node name="HealthComponent" parent="." index="0" node_paths=PackedStringArray("character")]
+character = NodePath("..")
+death_particle_effect = "fireball_explosion"
 
 [node name="HitboxComponent" parent="." index="1" node_paths=PackedStringArray("damage", "origin")]
 damage = NodePath("DamageComponent")
@@ -30,10 +33,11 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_7rc6v")
 
 [node name="DamageComponent" parent="HitboxComponent" index="1"]
-damage = 15
+damage = 8
+knockback = 5
 
 [node name="AudioHit" parent="HitboxComponent" index="2"]
-stream = ExtResource("2_p1nsr")
+volume_db = -80.0
 
 [node name="Sprite2D" parent="." index="2"]
 scale = Vector2(1.5, 1.5)
@@ -49,6 +53,7 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_71dlb")
 
 [node name="CollisionShape2D" parent="MouseClickArea2D" index="0"]
+position = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_v8gnl")
 
 [node name="Glow" parent="." index="5" instance=ExtResource("3_su886")]

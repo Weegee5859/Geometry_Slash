@@ -11,14 +11,23 @@ extends CharacterBody2D
 @onready var projectile_spawn_sound = $ProjectileSpawn
 @onready var deflect_sound = $DeflectSound
 @onready var delete_self_timer = $DeleteSelfTimer
+@onready var health_component = $HealthComponent
+
 
 
 func _ready():
 	if projectile_spawn_sound:
 		projectile_spawn_sound.play()
+		
+func _physics_process(delta):
+	self.rotate(0.06)
+	#showProjectileCanBeDeflected()
+	velocity = direction * speed
+	move_and_slide()
 	
 func distanceToPlayer():
 	var distance = (Global.players[0].position - self.position).length()
+	print(distance)
 	return distance
 	
 func showProjectileCanBeDeflected():
@@ -26,17 +35,11 @@ func showProjectileCanBeDeflected():
 	# If projectile is in range of player and the hitbox belongs to the enemy
 	# change sprite tint
 	if distanceToPlayer() <= deflectable_range and hitbox_component.isEnemyBox:
-		sprite_2d.modulate = Color(255,255,255,0.5)
+		sprite_2d.modulate = Color(255,255,20,0.5)
 		return
 	# Sprite returns to normal
 	sprite_2d.modulate = Color(1,1,1,1)
-	
 
-func _physics_process(delta):
-	self.rotate(0.06)
-	#showProjectileCanBeDeflected()
-	velocity = direction * speed
-	move_and_slide()
 	
 func changeEnemyBoxes(new_enemy):
 	hitbox_component.isEnemyBox = new_enemy
@@ -65,7 +68,8 @@ func _on_mouse_click_area_2d_input_event(viewport, event, shape_idx):
 			hurtbox_component.origin.setNewOrigin(tmp)
 			if deflect_sound:
 				deflect_sound.play()
-
+			
 
 func _on_delete_self_timer_timeout():
-	queue_free()
+	if health_component:
+		health_component.die()

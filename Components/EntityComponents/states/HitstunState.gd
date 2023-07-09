@@ -1,9 +1,11 @@
 extends "res://Components/EntityComponents/state.gd"
 class_name HitstunState
 @export var entity: CharacterBody2D
+@export var knockback_resistent: bool
 @onready var hitstun_timer: int = 5
 @onready var damage: DamageComponent
 @onready var target_pos: Vector2
+
 
 func enterState():
 	# Init hitstun Timer
@@ -27,7 +29,8 @@ func physicsProcessState(delta):
 	print(hitstun_timer)
 	if entity:
 		if weakref(damage).get_ref():
-			entity.velocity = direction * (100*damage.knockback)
+			if not knockback_resistent:
+				entity.velocity = direction * (100*damage.knockback)
 		hitstun_timer-=delta
 	if hitstun_timer<=0:
 		state_machine.changeToPreviousState()

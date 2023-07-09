@@ -25,7 +25,7 @@ size = Vector2(177, 179)
 
 [node name="Dasher" instance=ExtResource("1_53cy7")]
 script = ExtResource("2_d2f22")
-speed = 25
+speed = 35
 
 [node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("health_component", "state_machine", "hitstun_state", "origin")]
 health_component = NodePath("../HealthComponent")
@@ -53,7 +53,7 @@ host = NodePath("..")
 
 [node name="RunStateAI" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("4_l3188")]
 enemy = NodePath("../..")
-requiredDistanceToPlayer = 350
+requiredDistanceToPlayer = 250
 requiredDistanceToPlayerNewState = "dashattackstateai"
 
 [node name="DashAttackStateAI" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy") instance=ExtResource("5_xamas")]
@@ -63,6 +63,7 @@ finished_state_new_state = "runstateai"
 
 [node name="HitstunState" parent="StateMachine" index="2" node_paths=PackedStringArray("entity") instance=ExtResource("7_fgakl")]
 entity = NodePath("../..")
+knockback_resistent = false
 
 [node name="HitboxComponent" parent="." index="5" node_paths=PackedStringArray("damage", "origin") instance=ExtResource("7_nl43w")]
 damage = NodePath("DamageComponent")
@@ -75,7 +76,7 @@ scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_se83t")
 
 [node name="DamageComponent" parent="HitboxComponent" index="1"]
-damage = 5
+damage = 3
 
 [node name="AudioHit" parent="HitboxComponent" index="2"]
 pitch_scale = 0.6

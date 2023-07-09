@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://ch5oclvcmp8uw"]
+
+[ext_resource type="PackedScene" uid="uid://in15ef8uw25a" path="res://Particles/ParticleBase.tscn" id="1_v745y"]
+[ext_resource type="Texture2D" uid="uid://dwyu7la2i0s2h" path="res://Sprites/player.png" id="2_0opyp"]
+[ext_resource type="AudioStream" uid="uid://b5d7bcubi35yr" path="res://Audio/fireball_impact.mp3" id="2_32s7o"]
+
+[sub_resource type="Gradient" id="Gradient_7cf20"]
+offsets = PackedFloat32Array(0, 0.557987, 1)
+colors = PackedColorArray(0.482353, 0, 0, 1, 1, 0.784314, 0.0196078, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qwo65"]
+gradient = SubResource("Gradient_7cf20")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s024b"]
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 400.0
+angular_velocity_min = 180.0
+angular_velocity_max = 360.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.2
+scale_max = 0.6
+color_ramp = SubResource("GradientTexture1D_qwo65")
+
+[node name="fireball_explosion" instance=ExtResource("1_v745y")]
+
+[node name="GPUParticles2D" parent="." index="0"]
+process_material = SubResource("ParticleProcessMaterial_s024b")
+texture = ExtResource("2_0opyp")
+lifetime = 0.4
+explosiveness = 1.0
+
+[node name="ParticleSound" parent="." index="1"]
+stream = ExtResource("2_32s7o")
+pitch_scale = 1.3

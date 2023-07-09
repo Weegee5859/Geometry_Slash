@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://n2x4v7buc2vg"]
 
+[ext_resource type="PackedScene" uid="uid://cqeuyo0gauuqp" path="res://World/floor.tscn" id="1_8nbm5"]
 [ext_resource type="PackedScene" uid="uid://dj4abotujeis2" path="res://Player/player.tscn" id="1_bmmyh"]
 [ext_resource type="PackedScene" uid="uid://bn3iqfhukx1o6" path="res://UI/player_stats.tscn" id="1_py4pb"]
-[ext_resource type="Texture2D" uid="uid://bvlk6a4cncis5" path="res://Sprites/floor.png" id="1_qav4y"]
 [ext_resource type="PackedScene" uid="uid://glgt2gsn3dwg" path="res://Enemies/zombie.tscn" id="2_2yuse"]
 [ext_resource type="PackedScene" uid="uid://807q2fch5oe" path="res://Enemies/enemy_spawner.tscn" id="3_088hh"]
 [ext_resource type="PackedScene" uid="uid://c5qthu5enhg8v" path="res://Enemies/dasher.tscn" id="4_n84uc"]
@@ -17,13 +17,7 @@ adjustment_enabled = true
 
 [node name="level" type="Node2D"]
 
-[node name="Floor" type="Sprite2D" parent="."]
-position = Vector2(660, 376)
-scale = Vector2(42.25, 24.5)
-texture = ExtResource("1_qav4y")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_bon2q")
+[node name="Floor" parent="." instance=ExtResource("1_8nbm5")]
 
 [node name="PlayerStats" parent="." instance=ExtResource("1_py4pb")]
 
@@ -33,11 +27,17 @@ health_component = NodePath("../../../Player/HealthComponent")
 [node name="DashContainer" parent="PlayerStats/VBoxContainer" index="1" node_paths=PackedStringArray("player")]
 player = NodePath("../../../Player")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bon2q")
+
 [node name="Player" parent="." instance=ExtResource("1_bmmyh")]
-position = Vector2(424, 88)
+position = Vector2(640, 368)
+
+[node name="DashState" parent="Player/StateMachine" index="3" node_paths=PackedStringArray("health_component")]
+health_component = NodePath("../../HealthComponent")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_088hh")]
-position = Vector2(565, 667)
+position = Vector2(600, 744)
 enemies = Array[PackedScene]([ExtResource("2_2yuse"), ExtResource("7_20o1l")])
 min_cooldown = 3
 max_cooldown = 9
@@ -50,11 +50,19 @@ min_cooldown = 6
 max_cooldown = 12
 offset_x = 250
 
-[node name="Zombie" parent="." instance=ExtResource("2_2yuse")]
-position = Vector2(303, 354)
+[node name="EnemySpawner3" parent="." instance=ExtResource("3_088hh")]
+position = Vector2(1312, 400)
+enemies = Array[PackedScene]([ExtResource("2_2yuse"), ExtResource("7_20o1l")])
+min_cooldown = 5
+max_cooldown = 9
+offset_y = 250
 
-[node name="Fire_Zombie" parent="." instance=ExtResource("7_20o1l")]
-position = Vector2(114, 196)
+[node name="EnemySpawner4" parent="." instance=ExtResource("3_088hh")]
+position = Vector2(-40, 384)
+enemies = Array[PackedScene]([ExtResource("2_2yuse"), ExtResource("7_20o1l"), ExtResource("4_n84uc")])
+min_cooldown = 5
+max_cooldown = 9
+offset_y = 250
 
 [editable path="PlayerStats"]
 [editable path="Player"]

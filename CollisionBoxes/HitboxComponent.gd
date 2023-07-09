@@ -46,8 +46,8 @@ func _process(delta):
 					if audio_hit.stream:
 						audio_hit.play()
 			# Deleting Self
-			if deleteOriginOnContact:
-				self.get_parent().queue_free()
+			if deleteOriginOnContact and "health_component" in get_parent():
+				self.get_parent().health_component.die()
 			
 			print("============================================")
 			print(body.isEnemyBox)
