@@ -6,3 +6,5 @@
 script = ExtResource("1_ltii8")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+
+[node name="ParticleSound" type="AudioStreamPlayer2D" parent="."]

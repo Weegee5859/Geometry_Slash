@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://glgt2gsn3dwg"]
+[gd_scene load_steps=14 format=3 uid="uid://glgt2gsn3dwg"]
 
 [ext_resource type="PackedScene" uid="uid://0fqqmwll3635" path="res://Enemies/EnemyBase.tscn" id="1_n7lsy"]
 [ext_resource type="Script" path="res://Enemies/zombie.gd" id="2_fpapq"]
-[ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="2_ggs73"]
 [ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="3_0kq6h"]
 [ext_resource type="PackedScene" uid="uid://dmjfih37ghqlu" path="res://Components/EntityComponents/state_machine.tscn" id="3_4xepk"]
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="3_5s1dp"]
+[ext_resource type="Texture2D" uid="uid://2qu0cql5n8gf" path="res://Sprites/zombie.png" id="4_3v2ss"]
 [ext_resource type="PackedScene" uid="uid://djdwprsqs57gc" path="res://Components/EntityComponents/hitstun_state.tscn" id="4_yx4u7"]
 [ext_resource type="PackedScene" uid="uid://c4oag70xu48rw" path="res://Components/EntityComponents/states/run_to_player_state_ai.tscn" id="8_b1b84"]
+[ext_resource type="PackedScene" uid="uid://b63y2la3cys7" path="res://Shaders/glow.tscn" id="9_vc12m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaobf"]
 size = Vector2(115.5, 113.5)
@@ -26,7 +27,7 @@ size = Vector2(122, 124)
 
 [node name="Zombie" instance=ExtResource("1_n7lsy")]
 script = ExtResource("2_fpapq")
-speed = 40
+speed = 55
 
 [node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("health_component", "state_machine", "hitstun_state", "origin")]
 health_component = NodePath("../HealthComponent")
@@ -45,8 +46,8 @@ character = NodePath("..")
 
 [node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_cfku4")
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("2_ggs73")
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("4_3v2ss")
 
 [node name="CollisionShape2D" parent="." index="3"]
 scale = Vector2(0.5, 0.5)
@@ -68,14 +69,23 @@ damage = 3
 knockback = 5
 hitstun = 2
 
+[node name="AudioHit" parent="HitboxComponent" index="2"]
+pitch_scale = 0.6
+
 [node name="StateMachine" parent="." index="5" node_paths=PackedStringArray("host") instance=ExtResource("3_4xepk")]
 host = NodePath("..")
 
 [node name="RunStateAI" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("8_b1b84")]
 enemy = NodePath("../..")
+requiredDistanceToPlayer = null
+requiredDistanceToPlayerNewState = null
 
 [node name="HitstunState" parent="StateMachine" index="1" node_paths=PackedStringArray("entity") instance=ExtResource("4_yx4u7")]
 entity = NodePath("../..")
+
+[node name="Glow" parent="." index="6" instance=ExtResource("9_vc12m")]
+scale = Vector2(0.4, 0.4)
+color = Color(0.368627, 1, 0.329412, 1)
 
 [editable path="HurtboxComponent"]
 [editable path="HitboxComponent"]

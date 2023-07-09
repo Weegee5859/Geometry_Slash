@@ -9,6 +9,7 @@ class_name HitboxComponent
 @export var is_physical_attack: bool
 @export var is_projectile_attack: bool
 
+@onready var audio_hit = $AudioHit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,6 +43,8 @@ func _process(delta):
 				if weakref(origin).get_ref():
 					body.hitstun_state.processDamage(damage,origin.position)
 					body.state_machine.changeState("hitstunstate")
+					if audio_hit.stream:
+						audio_hit.play()
 			# Deleting Self
 			if deleteOriginOnContact:
 				self.get_parent().queue_free()

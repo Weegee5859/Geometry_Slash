@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5w3nslycj8rh"]
+[gd_scene load_steps=9 format=3 uid="uid://c5w3nslycj8rh"]
 
 [ext_resource type="PackedScene" uid="uid://kahrns6og4rr" path="res://Projectiles/projectile_base.tscn" id="1_sgdyo"]
-[ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="2_5mpyi"]
+[ext_resource type="AudioStream" uid="uid://b5d7bcubi35yr" path="res://Audio/fireball_impact.mp3" id="2_p1nsr"]
+[ext_resource type="Texture2D" uid="uid://bpcosvpyidis3" path="res://Sprites/bullet_blaster.png" id="2_sq0iq"]
+[ext_resource type="PackedScene" uid="uid://b63y2la3cys7" path="res://Shaders/glow.tscn" id="3_su886"]
+[ext_resource type="AudioStream" uid="uid://bjj2nejcjege8" path="res://Audio/fireball_shot.mp3" id="4_ur8ms"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rc6v"]
 size = Vector2(72, 102)
@@ -13,7 +16,6 @@ size = Vector2(148, 132)
 size = Vector2(219, 193)
 
 [node name="Fireball" instance=ExtResource("1_sgdyo")]
-scale = Vector2(0.5, 0.5)
 speed = 225
 
 [node name="HitboxComponent" parent="." index="1" node_paths=PackedStringArray("damage", "origin")]
@@ -30,10 +32,12 @@ shape = SubResource("RectangleShape2D_7rc6v")
 [node name="DamageComponent" parent="HitboxComponent" index="1"]
 damage = 15
 
+[node name="AudioHit" parent="HitboxComponent" index="2"]
+stream = ExtResource("2_p1nsr")
+
 [node name="Sprite2D" parent="." index="2"]
-scale = Vector2(0.5, 0.5)
-skew = 0.349066
-texture = ExtResource("2_5mpyi")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_sq0iq")
 
 [node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("origin")]
 isDeflectable = true
@@ -46,6 +50,18 @@ shape = SubResource("RectangleShape2D_71dlb")
 
 [node name="CollisionShape2D" parent="MouseClickArea2D" index="0"]
 shape = SubResource("RectangleShape2D_v8gnl")
+
+[node name="Glow" parent="." index="5" instance=ExtResource("3_su886")]
+scale = Vector2(0.3, 0.3)
+color = Color(1, 0.172549, 0.0901961, 1)
+
+[node name="ProjectileSpawn" parent="." index="6"]
+stream = ExtResource("4_ur8ms")
+volume_db = -12.0
+pitch_scale = 2.01
+
+[node name="DeflectSound" parent="." index="7"]
+volume_db = -8.0
 
 [editable path="HitboxComponent"]
 [editable path="HurtboxComponent"]

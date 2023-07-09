@@ -3,7 +3,10 @@ extends Node2D
 var players: Array[CharacterBody2D]
 
 var particles: Dictionary = {
-	"hit_spark": preload("res://Particles/hit_spark_particle.tscn")
+	"hit_spark": preload("res://Particles/hit_spark_particle.tscn"),
+	"pixel_explosion": preload("res://Particles/pixel_explosion.tscn"),
+	"single_slash": preload("res://Particles/single_slash.tscn"),
+	"quake_explosion": preload("res://Particles/quake_explosion.tscn")
 }
 
 var projectiles: Dictionary = {

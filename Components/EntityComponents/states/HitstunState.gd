@@ -16,7 +16,8 @@ func enterState():
 		entity.sprite.material.set_shader_parameter("enabled", true)
 	# Particle
 	print(self.entity)
-	Global.addParticleToWorld("hit_spark",entity.position,self)
+	
+	Global.addParticleToWorld("pixel_explosion",entity.position,self)
 
 func physicsProcessState(delta):
 	

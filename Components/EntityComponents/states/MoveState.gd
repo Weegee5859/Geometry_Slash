@@ -14,10 +14,11 @@ func getPlayerTarget():
 	if Global.players.size()>0:
 		target = Global.players[0]
 		
-func runTowardsTarget():
+func runTowardsTarget(delta):
 	var dir = (target.position - enemy.position).normalized()
 	#enemy.velocity.x = move_toward(0, enemy.velocity.x*enemy.speed, 3)
-	enemy.velocity = dir * enemy.speed
+	#enemy.velocity = dir * enemy.speed
+	enemy.velocity = lerp(enemy.velocity, dir * enemy.speed, 0.5)
 	
 func returndistanceToPlayer():
 	var dis = (target.position - enemy.position)

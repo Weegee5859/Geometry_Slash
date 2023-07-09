@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5qthu5enhg8v"]
+[gd_scene load_steps=14 format=3 uid="uid://c5qthu5enhg8v"]
 
 [ext_resource type="PackedScene" uid="uid://0fqqmwll3635" path="res://Enemies/EnemyBase.tscn" id="1_53cy7"]
 [ext_resource type="Script" path="res://Enemies/dasher.gd" id="2_d2f22"]
-[ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="2_gj18w"]
 [ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="3_a063p"]
 [ext_resource type="PackedScene" uid="uid://dmjfih37ghqlu" path="res://Components/EntityComponents/state_machine.tscn" id="3_myfoq"]
+[ext_resource type="Texture2D" uid="uid://5yeb0oue5cjt" path="res://Sprites/dasher.png" id="4_3g3th"]
 [ext_resource type="PackedScene" uid="uid://c4oag70xu48rw" path="res://Components/EntityComponents/states/run_to_player_state_ai.tscn" id="4_l3188"]
 [ext_resource type="PackedScene" uid="uid://com8vliyfbogd" path="res://Components/EntityComponents/states/dash_attack_state_ai.tscn" id="5_xamas"]
 [ext_resource type="PackedScene" uid="uid://djdwprsqs57gc" path="res://Components/EntityComponents/hitstun_state.tscn" id="7_fgakl"]
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="7_nl43w"]
+[ext_resource type="PackedScene" uid="uid://b63y2la3cys7" path="res://Shaders/glow.tscn" id="10_rj7yg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbvyt"]
 size = Vector2(174, 175)
@@ -24,6 +25,7 @@ size = Vector2(177, 179)
 
 [node name="Dasher" instance=ExtResource("1_53cy7")]
 script = ExtResource("2_d2f22")
+speed = 25
 
 [node name="HurtboxComponent" parent="." index="0" node_paths=PackedStringArray("health_component", "state_machine", "hitstun_state", "origin")]
 health_component = NodePath("../HealthComponent")
@@ -41,21 +43,22 @@ max_health = 15
 character = NodePath("..")
 
 [node name="Sprite2D" parent="." index="2"]
+texture_filter = 1
 material = SubResource("ShaderMaterial_8edrl")
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_gj18w")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_3g3th")
 
 [node name="StateMachine" parent="." index="4" node_paths=PackedStringArray("host") instance=ExtResource("3_myfoq")]
 host = NodePath("..")
 
 [node name="RunStateAI" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("4_l3188")]
 enemy = NodePath("../..")
-requiredDistanceToPlayer = 200
+requiredDistanceToPlayer = 350
 requiredDistanceToPlayerNewState = "dashattackstateai"
 
 [node name="DashAttackStateAI" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy") instance=ExtResource("5_xamas")]
 enemy = NodePath("../..")
-dash_speed = 600.0
+dash_speed = 700.0
 finished_state_new_state = "runstateai"
 
 [node name="HitstunState" parent="StateMachine" index="2" node_paths=PackedStringArray("entity") instance=ExtResource("7_fgakl")]
@@ -73,6 +76,13 @@ shape = SubResource("RectangleShape2D_se83t")
 
 [node name="DamageComponent" parent="HitboxComponent" index="1"]
 damage = 5
+
+[node name="AudioHit" parent="HitboxComponent" index="2"]
+pitch_scale = 0.6
+
+[node name="Glow" parent="." index="6" instance=ExtResource("10_rj7yg")]
+scale = Vector2(0.5, 0.5)
+color = Color(0.745098, 0.266667, 1, 1)
 
 [editable path="HurtboxComponent"]
 [editable path="HitboxComponent"]

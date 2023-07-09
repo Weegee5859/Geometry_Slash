@@ -7,4 +7,3 @@
 script = ExtResource("2_ouwdi")
 requiredDistanceToPlayer = 0
 requiredDistanceToPlayerNewState = ""
-distance_new_state = ""

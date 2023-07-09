@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cptd1436f2k32"]
+
+[ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="1_yr4ti"]
+[ext_resource type="Texture2D" uid="uid://bggt3bl1g11qk" path="res://Sprites/light.png" id="2_4pfnh"]
+
+[node name="level2" type="Node2D"]
+
+[node name="floor" type="Sprite2D" parent="."]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(729, 410)
+scale = Vector2(13.5625, 7.39844)
+texture = ExtResource("1_yr4ti")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(2, 2, 2, 1)
+position = Vector2(338, 220)
+texture = ExtResource("1_yr4ti")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.903598, 0.903598, 0.903598, 1)
+position = Vector2(1032, 559)
+texture = ExtResource("1_yr4ti")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D2"]
+position = Vector2(8, 0)
+texture = ExtResource("2_4pfnh")

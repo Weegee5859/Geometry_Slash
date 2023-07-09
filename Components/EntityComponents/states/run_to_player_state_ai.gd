@@ -6,8 +6,7 @@ func physicsProcessState(delta):
 	if not enemy: return
 	
 	if inRangeOfPlayer():
-		print("dhufdbsifgdbskjfgkdfkjdhfkjdshkj")
 		state_machine.changeState(requiredDistanceToPlayerNewState)
 		return
-	runTowardsTarget()
+	runTowardsTarget(delta)
 	enemy.move_and_slide()

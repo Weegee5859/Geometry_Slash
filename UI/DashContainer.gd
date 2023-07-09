@@ -2,8 +2,8 @@ extends HBoxContainer
 
 @export var player: CharacterBody2D
 var node = TextureRect
-var dash_sprite = preload("res://Sprites/sword_hit.png")
-var dash_sprite_empty = preload("res://Sprites/sword_swipe.png")
+var dash_sprite = preload("res://Sprites/dash_ui_on.png")
+var dash_sprite_empty = preload("res://Sprites/dash_ui_off.png")
 
 func _ready():
 	if player:

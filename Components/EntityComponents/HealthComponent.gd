@@ -24,4 +24,5 @@ func die(cause_of_death: CharacterBody2D = null):
 	if cause_of_death:
 		if "got_kill" in cause_of_death:
 			cause_of_death.got_kill = true
+	Global.addParticleToWorld("quake_explosion",character.position,character)
 	character.queue_free()

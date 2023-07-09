@@ -1,12 +1,13 @@
-[gd_scene load_steps=31 format=3 uid="uid://dj4abotujeis2"]
+[gd_scene load_steps=34 format=3 uid="uid://dj4abotujeis2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4cu8s"]
-[ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="1_v3pwk"]
 [ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="2_usk50"]
+[ext_resource type="Texture2D" uid="uid://dwyu7la2i0s2h" path="res://Sprites/player.png" id="3_kklvx"]
 [ext_resource type="PackedScene" uid="uid://c8xosetoc7mpa" path="res://CollisionBoxes/hurtbox_component.tscn" id="3_kmtpl"]
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="4_hc8hj"]
 [ext_resource type="PackedScene" uid="uid://bjgquag0s4p8w" path="res://Components/EntityComponents/health_component.tscn" id="5_fn2c3"]
 [ext_resource type="PackedScene" uid="uid://dmjfih37ghqlu" path="res://Components/EntityComponents/state_machine.tscn" id="6_eo0sq"]
+[ext_resource type="AudioStream" uid="uid://c6r2fhrm06lvx" path="res://Audio/dash_impact.mp3" id="6_w7t1k"]
 [ext_resource type="PackedScene" uid="uid://dvbeytb1yngbl" path="res://Components/EntityComponents/states/run_state.tscn" id="7_2f3ug"]
 [ext_resource type="PackedScene" uid="uid://ddt4656m0ouik" path="res://Components/EntityComponents/states/idle_state.tscn" id="7_7mqim"]
 [ext_resource type="PackedScene" uid="uid://oikntwuy5f7g" path="res://Components/EntityComponents/states/ready_state.tscn" id="9_g5mtj"]
@@ -15,6 +16,8 @@
 [ext_resource type="Script" path="res://Player/DashLine.gd" id="13_q57k6"]
 [ext_resource type="Texture2D" uid="uid://b6g3553v370e3" path="res://Sprites/sword_swipe_sprite_sheet.png" id="14_g8rct"]
 [ext_resource type="Script" path="res://Player/DashIndicator.gd" id="14_mqomw"]
+[ext_resource type="AudioStream" uid="uid://b8r3be6xhcgc" path="res://Audio/impact-sound_2.mp3" id="15_levlb"]
+[ext_resource type="PackedScene" uid="uid://b63y2la3cys7" path="res://Shaders/glow.tscn" id="16_3ku1a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4u14"]
 shader = ExtResource("2_usk50")
@@ -178,8 +181,8 @@ script = ExtResource("1_4cu8s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_s4u14")
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_v3pwk")
+scale = Vector2(2, 2)
+texture = ExtResource("3_kklvx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.15, 0.15)
@@ -219,7 +222,12 @@ shape = SubResource("RectangleShape2D_h70yl")
 debug_color = Color(0.972549, 0.141176, 0.25098, 0.419608)
 
 [node name="DamageComponent" parent="DashHitboxComponent" index="1"]
-damage = 20
+damage = 15
+hitstun = 2
+
+[node name="AudioHit" parent="DashHitboxComponent" index="2"]
+stream = ExtResource("6_w7t1k")
+pitch_scale = 2.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_fn2c3")]
 
@@ -276,7 +284,12 @@ shape = SubResource("RectangleShape2D_avmiq")
 damage = 4
 knockback = 4
 
+[node name="AudioHit" parent="SwordSlashBase/HitboxComponent" index="2"]
+stream = ExtResource("15_levlb")
+pitch_scale = 3.5
+
 [node name="SwordSprite" type="Sprite2D" parent="SwordSlashBase/HitboxComponent"]
+modulate = Color(8, 8, 8, 1)
 texture_filter = 1
 position = Vector2(-0.999929, 19)
 scale = Vector2(2.42365, 2.42365)
@@ -288,6 +301,10 @@ hframes = 6
 libraries = {
 "": SubResource("AnimationLibrary_8dg6e")
 }
+
+[node name="PlayerGlow" parent="." instance=ExtResource("16_3ku1a")]
+position = Vector2(0, 5.82077e-11)
+scale = Vector2(0.4, 0.4)
 
 [connection signal="input_event" from="MouseDetectionArea" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="MouseDetectionArea" to="." method="_on_area_2d_mouse_entered"]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5dlxtvo4p705"]
+
+[ext_resource type="PackedScene" uid="uid://in15ef8uw25a" path="res://Particles/ParticleBase.tscn" id="1_ucmfk"]
+[ext_resource type="Texture2D" uid="uid://dwyu7la2i0s2h" path="res://Sprites/player.png" id="2_thnww"]
+
+[sub_resource type="Gradient" id="Gradient_i0os1"]
+offsets = PackedFloat32Array(0, 0.146608, 0.778993)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ng7pg"]
+gradient = SubResource("Gradient_i0os1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mpy6q"]
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 180.0
+gravity = Vector3(0, 50, 0)
+initial_velocity_min = 160.0
+initial_velocity_max = 160.0
+angular_velocity_max = 360.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.4
+scale_max = 0.4
+color_ramp = SubResource("GradientTexture1D_ng7pg")
+
+[node name="PixelExplosion" instance=ExtResource("1_ucmfk")]
+
+[node name="GPUParticles2D" parent="." index="0"]
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_mpy6q")
+texture = ExtResource("2_thnww")
+lifetime = 0.6
+explosiveness = 1.0
+randomness = 0.7

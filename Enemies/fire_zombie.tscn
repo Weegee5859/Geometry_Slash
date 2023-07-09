@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://xj81a4iflaof"]
+[gd_scene load_steps=13 format=3 uid="uid://xj81a4iflaof"]
 
 [ext_resource type="PackedScene" uid="uid://0fqqmwll3635" path="res://Enemies/EnemyBase.tscn" id="1_rdtc8"]
 [ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="2_y4vd3"]
-[ext_resource type="Texture2D" uid="uid://bcbqyb7g8ofmj" path="res://icon.svg" id="3_endgs"]
+[ext_resource type="Texture2D" uid="uid://d3xkolnh3fyom" path="res://Sprites/blaster.png" id="3_pd04v"]
 [ext_resource type="PackedScene" uid="uid://dmjfih37ghqlu" path="res://Components/EntityComponents/state_machine.tscn" id="4_4qaum"]
 [ext_resource type="PackedScene" uid="uid://co8m7p2d3ujo5" path="res://Components/EntityComponents/states/projectile_state_ai.tscn" id="5_s1mks"]
 [ext_resource type="PackedScene" uid="uid://djdwprsqs57gc" path="res://Components/EntityComponents/hitstun_state.tscn" id="6_p50lx"]
 [ext_resource type="PackedScene" uid="uid://c4oag70xu48rw" path="res://Components/EntityComponents/states/run_to_player_state_ai.tscn" id="7_dytai"]
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="8_nny4h"]
+[ext_resource type="PackedScene" uid="uid://b63y2la3cys7" path="res://Shaders/glow.tscn" id="9_fwid1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpser"]
 size = Vector2(248, 247)
@@ -39,27 +40,27 @@ max_health = 15
 character = NodePath("..")
 
 [node name="Sprite2D" parent="." index="2"]
-modulate = Color(1, 0.286275, 0.0980392, 1)
+texture_filter = 1
 material = SubResource("ShaderMaterial_jalx7")
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_endgs")
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("3_pd04v")
 
 [node name="StateMachine" parent="." index="4" node_paths=PackedStringArray("host") instance=ExtResource("4_4qaum")]
 host = NodePath("..")
 
-[node name="ProjectileStateAI" parent="StateMachine" index="0" node_paths=PackedStringArray("entity") instance=ExtResource("5_s1mks")]
-entity = NodePath("../..")
-amount_of_projectiles = 2
-projectile_name = "fireball"
-projectile_rate = 100.0
-
-[node name="HitstunState" parent="StateMachine" index="1" node_paths=PackedStringArray("entity") instance=ExtResource("6_p50lx")]
-entity = NodePath("../..")
-
-[node name="RunStateAI" parent="StateMachine" index="2" node_paths=PackedStringArray("enemy") instance=ExtResource("7_dytai")]
+[node name="RunStateAI" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy") instance=ExtResource("7_dytai")]
 enemy = NodePath("../..")
 requiredDistanceToPlayer = 500
 requiredDistanceToPlayerNewState = "projectilestateai"
+
+[node name="ProjectileStateAI" parent="StateMachine" index="1" node_paths=PackedStringArray("entity") instance=ExtResource("5_s1mks")]
+entity = NodePath("../..")
+amount_of_projectiles = 1
+projectile_name = "fireball"
+projectile_rate = 200.0
+
+[node name="HitstunState" parent="StateMachine" index="2" node_paths=PackedStringArray("entity") instance=ExtResource("6_p50lx")]
+entity = NodePath("../..")
 
 [node name="HitboxComponent" parent="." index="5" node_paths=PackedStringArray("damage", "origin") instance=ExtResource("8_nny4h")]
 damage = NodePath("DamageComponent")
@@ -74,6 +75,13 @@ shape = SubResource("RectangleShape2D_gx2p8")
 [node name="DamageComponent" parent="HitboxComponent" index="1"]
 damage = 4
 knockback = 4
+
+[node name="AudioHit" parent="HitboxComponent" index="2"]
+pitch_scale = 0.4
+
+[node name="Glow" parent="." index="6" instance=ExtResource("9_fwid1")]
+scale = Vector2(0.5, 0.5)
+color = Color(1, 0.372549, 0.054902, 1)
 
 [editable path="HurtboxComponent"]
 [editable path="HitboxComponent"]

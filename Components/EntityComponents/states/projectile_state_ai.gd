@@ -4,14 +4,16 @@ extends "res://Components/EntityComponents/state.gd"
 @export var amount_of_projectiles: int
 @onready var current_amount_of_projectiles: int = 0
 @export var projectile_name: String
-@export var projectile_rate: float
 @export var next_state: String
+@export var projectile_rate: float
 @onready var projectile_rate_timer: float = 0
-@onready var cooldown_default: int = 100
+@onready var cooldown_default: int = 50
 @onready var current_cooldown: int = 0
 @onready var init_projectile_position_offset: float = 65
 
-func EnterState():
+func enterState():
+	current_cooldown = cooldown_default
+	return
 	if projectile_rate >= 0:
 		projectile_rate_timer = projectile_rate
 
@@ -27,6 +29,7 @@ func processState(delta):
 		current_amount_of_projectiles -= 1
 		var direction_to_player = (Global.players[0].position-entity.position).normalized()
 		Global.addProjectileToWorld(projectile_name,entity.position+(direction_to_player*init_projectile_position_offset),direction_to_player)
+		projectile_rate_timer = projectile_rate
 		if current_amount_of_projectiles <= 0:
 			print("DONE WITH PROJECTILES")
 			state_machine.changeState("runstateai")

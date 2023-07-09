@@ -16,8 +16,6 @@ input_name = "color"
 
 [resource]
 code = "shader_type canvas_item;
-render_mode blend_mix;
-
 uniform bool enabled = false;
 uniform vec4 tint : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
 
