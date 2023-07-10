@@ -6,6 +6,8 @@ func enterState():
 	print("entered movementState")
 
 func physicsProcessState(delta):
+	if Global.paused:
+		state_machine.changeState("idlestate")
 	#Set player direction and distance
 	player.direction = (player.get_global_mouse_position() - player.position).normalized()
 	player.distance = (player.get_global_mouse_position() - player.position)

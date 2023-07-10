@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn3iqfhukx1o6"]
+[gd_scene load_steps=6 format=3 uid="uid://bn3iqfhukx1o6"]
 
 [ext_resource type="Script" path="res://UI/HealthBar.gd" id="1_pbde2"]
+[ext_resource type="Theme" uid="uid://ehtm2ex251do" path="res://UI/Themes/health_bar_theme.tres" id="1_r45kq"]
 [ext_resource type="Script" path="res://UI/DashContainer.gd" id="2_lbp8b"]
+[ext_resource type="Texture2D" uid="uid://ccye7j4u7oqvg" path="res://Sprites/health_icon.png" id="4_hc6qb"]
+[ext_resource type="Texture2D" uid="uid://b4y65yntpvihd" path="res://Sprites/dash_icon.png" id="5_6e0cv"]
 
 [node name="PlayerStats" type="Control"]
 layout_mode = 3
@@ -13,13 +16,38 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 176.0
-offset_bottom = 47.0
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 227.0
+offset_bottom = 67.0
 
 [node name="HealthBar" type="ProgressBar" parent="VBoxContainer"]
 layout_mode = 2
+tooltip_text = "fdfd"
+theme = ExtResource("1_r45kq")
+value = 100.0
 script = ExtResource("1_pbde2")
 
 [node name="DashContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 script = ExtResource("2_lbp8b")
+
+[node name="hp_icon" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 3.0
+offset_top = 18.0
+offset_right = 131.0
+offset_bottom = 146.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_hc6qb")
+
+[node name="dash_icon" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 60.0
+offset_right = 42.0
+offset_bottom = 100.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_6e0cv")

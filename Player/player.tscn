@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dj4abotujeis2"]
+[gd_scene load_steps=32 format=3 uid="uid://dj4abotujeis2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_4cu8s"]
 [ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="2_usk50"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" path="res://Player/DashLine.gd" id="13_q57k6"]
 [ext_resource type="Texture2D" uid="uid://b6g3553v370e3" path="res://Sprites/sword_swipe_sprite_sheet.png" id="14_g8rct"]
 [ext_resource type="Script" path="res://Player/DashIndicator.gd" id="14_mqomw"]
-[ext_resource type="AudioStream" uid="uid://b8r3be6xhcgc" path="res://Audio/impact-sound_2.mp3" id="15_levlb"]
 [ext_resource type="PackedScene" uid="uid://b63y2la3cys7" path="res://Shaders/glow.tscn" id="16_3ku1a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s4u14"]
@@ -28,7 +27,7 @@ shader_parameter/tint = Color(1, 1, 1, 1)
 size = Vector2(458, 462)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dg0lh"]
-size = Vector2(592, 584)
+size = Vector2(1180, 1110)
 
 [sub_resource type="Animation" id="Animation_q0wfs"]
 resource_name = "test"
@@ -188,7 +187,7 @@ shape = SubResource("RectangleShape2D_yte7j")
 [node name="MouseDetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetectionArea"]
-position = Vector2(-2, 1)
+position = Vector2(2, 8)
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_dg0lh")
 debug_color = Color(0.172549, 0.619608, 0.494118, 0.419608)
@@ -227,7 +226,8 @@ hitstun = 2
 stream = ExtResource("6_w7t1k")
 pitch_scale = 2.0
 
-[node name="HealthComponent" parent="." instance=ExtResource("5_fn2c3")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("5_fn2c3")]
+character = NodePath("..")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("host") instance=ExtResource("6_eo0sq")]
 host = NodePath("..")
@@ -248,7 +248,6 @@ dash_trail = NodePath("../../DashLine")
 
 [node name="HitstunState" parent="StateMachine" node_paths=PackedStringArray("entity") instance=ExtResource("11_mhhc2")]
 entity = NodePath("../..")
-knockback_resistent = false
 
 [node name="DashLine" type="Line2D" parent="." node_paths=PackedStringArray("target")]
 visible = false
@@ -282,7 +281,6 @@ damage = 4
 knockback = 4
 
 [node name="AudioHit" parent="SwordSlashBase/HitboxComponent" index="2"]
-stream = ExtResource("15_levlb")
 pitch_scale = 3.5
 
 [node name="SwordSprite" type="Sprite2D" parent="SwordSlashBase/HitboxComponent"]

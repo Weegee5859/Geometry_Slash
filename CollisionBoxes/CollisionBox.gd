@@ -4,6 +4,7 @@ class_name CollisionBox
 @export var origin: CharacterBody2D
 @onready var original_origin: CharacterBody2D = origin
 @export var isEnemyBox: bool
+@onready var collision_shape = $CollisionShape2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

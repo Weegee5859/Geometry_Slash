@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=3 uid="uid://jd316womii46"]
+
+[ext_resource type="PackedScene" uid="uid://dml87q3502cio" path="res://Camera/camera_2d.tscn" id="1_imrwc"]
+[ext_resource type="PackedScene" uid="uid://cqeuyo0gauuqp" path="res://World/floor.tscn" id="1_j5d5w"]
+[ext_resource type="PackedScene" uid="uid://bn3iqfhukx1o6" path="res://UI/player_stats.tscn" id="2_qbbmn"]
+[ext_resource type="FontFile" uid="uid://dwsjcsp668u1n" path="res://UI/Fonts/ARCADECLASSIC.TTF" id="3_v5g7f"]
+[ext_resource type="PackedScene" uid="uid://c3b3rbm02a10c" path="res://UI/redirect_button.tscn" id="4_telqj"]
+[ext_resource type="PackedScene" uid="uid://dj4abotujeis2" path="res://Player/player.tscn" id="5_37s4g"]
+[ext_resource type="PackedScene" uid="uid://b5cehfyt4cen5" path="res://Enemies/training_dummy.tscn" id="6_k4fc3"]
+[ext_resource type="PackedScene" uid="uid://807q2fch5oe" path="res://Enemies/enemy_spawner.tscn" id="7_hohdv"]
+[ext_resource type="PackedScene" uid="uid://bjnjcggkfeho7" path="res://Projectiles/training_projectile.tscn" id="8_x8f00"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f51t8"]
+line_spacing = 4.0
+font = ExtResource("3_v5g7f")
+font_size = 26
+
+[node name="level" type="Node2D"]
+
+[node name="Camera" parent="." instance=ExtResource("1_imrwc")]
+
+[node name="Floor" parent="." instance=ExtResource("1_j5d5w")]
+
+[node name="PlayerStats" parent="." instance=ExtResource("2_qbbmn")]
+
+[node name="HealthBar" parent="PlayerStats/VBoxContainer" index="0" node_paths=PackedStringArray("health_component")]
+health_component = NodePath("../../../Player/HealthComponent")
+
+[node name="DashContainer" parent="PlayerStats/VBoxContainer" index="1" node_paths=PackedStringArray("player")]
+player = NodePath("../../../Player")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 1280.0
+offset_bottom = 736.0
+text = "Tap  and  hold  around  the  Screen  to  move  and  attack!
+
+
+
+
+
+Drag  the  player  to  do  a  dash  attack!
+
+
+
+
+
+Tap  on  projectiles  when  they  get  near  you  to  deflect them!
+(Don't  Dash  through  projectiles!)"
+label_settings = SubResource("LabelSettings_f51t8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartGameButton" parent="Control" instance=ExtResource("4_telqj")]
+layout_mode = 0
+offset_left = 546.0
+offset_top = 668.0
+offset_right = 748.0
+offset_bottom = 713.0
+text = "Start Game"
+redirection_file_path = "res://Levels/level.tscn"
+
+[node name="Player" parent="." instance=ExtResource("5_37s4g")]
+position = Vector2(120, 256)
+
+[node name="Label" type="Label" parent="Player"]
+offset_left = -40.0
+offset_top = -72.0
+offset_right = 50.0
+offset_bottom = -40.0
+theme_override_fonts/font = ExtResource("3_v5g7f")
+theme_override_font_sizes/font_size = 28
+text = "PLAYER"
+
+[node name="TrainingDummy" parent="." instance=ExtResource("6_k4fc3")]
+position = Vector2(1168, 264)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("7_hohdv")]
+position = Vector2(1320, 440)
+enemies = Array[PackedScene]([ExtResource("8_x8f00")])
+min_cooldown = 3
+max_cooldown = 3
+
+[editable path="PlayerStats"]
+[editable path="Player"]
+[editable path="Player/HurtboxComponent"]
+[editable path="Player/DashHitboxComponent"]
+[editable path="Player/SwordSlashBase/HitboxComponent"]

@@ -16,6 +16,7 @@ func _ready():
 
 func _process(delta):
 	if not active: return
+	if Global.paused: return
 	if enemies and timer.is_stopped():
 		var random: int = randi_range(0,enemies.size()-1)
 		var instance = enemies[random].instantiate()

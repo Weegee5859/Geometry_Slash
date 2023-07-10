@@ -82,7 +82,6 @@ requiredDistanceToPlayerNewState = null
 
 [node name="HitstunState" parent="StateMachine" index="1" node_paths=PackedStringArray("entity") instance=ExtResource("4_yx4u7")]
 entity = NodePath("../..")
-knockback_resistent = false
 
 [node name="Glow" parent="." index="6" instance=ExtResource("9_vc12m")]
 scale = Vector2(0.4, 0.4)

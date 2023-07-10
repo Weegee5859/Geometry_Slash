@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://n2x4v7buc2vg"]
+
+[ext_resource type="PackedScene" uid="uid://dml87q3502cio" path="res://Camera/camera_2d.tscn" id="1_45rxu"]
+[ext_resource type="PackedScene" uid="uid://cqeuyo0gauuqp" path="res://World/floor.tscn" id="1_il35b"]
+[ext_resource type="PackedScene" uid="uid://bn3iqfhukx1o6" path="res://UI/player_stats.tscn" id="2_ul8jv"]
+[ext_resource type="PackedScene" uid="uid://dj4abotujeis2" path="res://Player/player.tscn" id="3_kty3a"]
+[ext_resource type="PackedScene" uid="uid://807q2fch5oe" path="res://Enemies/enemy_spawner.tscn" id="4_me15j"]
+[ext_resource type="PackedScene" uid="uid://glgt2gsn3dwg" path="res://Enemies/zombie.tscn" id="5_rc55e"]
+[ext_resource type="PackedScene" uid="uid://xj81a4iflaof" path="res://Enemies/fire_zombie.tscn" id="6_sq5ft"]
+[ext_resource type="PackedScene" uid="uid://c5qthu5enhg8v" path="res://Enemies/dasher.tscn" id="7_cte02"]
+
+[sub_resource type="Environment" id="Environment_bon2q"]
+background_mode = 3
+glow_intensity = 1.5
+glow_blend_mode = 1
+glow_hdr_threshold = 0.1
+adjustment_enabled = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45fjc"]
+size = Vector2(1301, 20)
+
+[node name="level" type="Node2D"]
+
+[node name="Camera" parent="." instance=ExtResource("1_45rxu")]
+
+[node name="Floor" parent="." instance=ExtResource("1_il35b")]
+
+[node name="PlayerStats" parent="." instance=ExtResource("2_ul8jv")]
+
+[node name="HealthBar" parent="PlayerStats/VBoxContainer" index="0" node_paths=PackedStringArray("health_component")]
+health_component = NodePath("../../../Player/HealthComponent")
+
+[node name="DashContainer" parent="PlayerStats/VBoxContainer" index="1" node_paths=PackedStringArray("player")]
+player = NodePath("../../../Player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bon2q")
+
+[node name="Player" parent="." instance=ExtResource("3_kty3a")]
+position = Vector2(640, 368)
+
+[node name="DashState" parent="Player/StateMachine" index="3" node_paths=PackedStringArray("health_component")]
+health_component = NodePath("../../HealthComponent")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("4_me15j")]
+position = Vector2(600, 744)
+enemies = Array[PackedScene]([ExtResource("5_rc55e"), ExtResource("6_sq5ft")])
+min_cooldown = 3
+max_cooldown = 9
+offset_x = 250
+
+[node name="EnemySpawner2" parent="." instance=ExtResource("4_me15j")]
+position = Vector2(610, -24)
+enemies = Array[PackedScene]([ExtResource("7_cte02"), ExtResource("5_rc55e")])
+min_cooldown = 6
+max_cooldown = 12
+offset_x = 250
+
+[node name="EnemySpawner3" parent="." instance=ExtResource("4_me15j")]
+position = Vector2(1312, 400)
+enemies = Array[PackedScene]([ExtResource("5_rc55e"), ExtResource("6_sq5ft")])
+min_cooldown = 5
+max_cooldown = 9
+offset_y = 250
+
+[node name="EnemySpawner4" parent="." instance=ExtResource("4_me15j")]
+position = Vector2(-40, 384)
+enemies = Array[PackedScene]([ExtResource("5_rc55e"), ExtResource("6_sq5ft"), ExtResource("7_cte02")])
+min_cooldown = 5
+max_cooldown = 9
+offset_y = 250
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(640.5, 0)
+shape = SubResource("RectangleShape2D_45fjc")
+
+[editable path="PlayerStats"]
+[editable path="Player"]
+[editable path="Player/HurtboxComponent"]
+[editable path="Player/DashHitboxComponent"]
+[editable path="Player/SwordSlashBase/HitboxComponent"]

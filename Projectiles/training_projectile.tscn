@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjnjcggkfeho7"]
+[gd_scene load_steps=7 format=3 uid="uid://bjnjcggkfeho7"]
 
 [ext_resource type="PackedScene" uid="uid://kahrns6og4rr" path="res://Projectiles/projectile_base.tscn" id="1_xyfl8"]
+[ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="2_dq7rs"]
 [ext_resource type="Texture2D" uid="uid://bpcosvpyidis3" path="res://Sprites/bullet_blaster.png" id="2_xne38"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mm83k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kew2t"]
+resource_local_to_scene = true
+shader = ExtResource("2_dq7rs")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1owhx"]
 size = Vector2(60, 60)
@@ -31,8 +38,12 @@ shape = SubResource("RectangleShape2D_mm83k")
 damage = 0
 knockback = 3
 
+[node name="AudioHit" parent="HitboxComponent" index="2"]
+stream = null
+
 [node name="Sprite2D" parent="." index="2"]
 texture_filter = 1
+material = SubResource("ShaderMaterial_kew2t")
 texture = ExtResource("2_xne38")
 
 [node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("origin")]
@@ -41,5 +52,9 @@ isEnemyBox = true
 
 [node name="CollisionShape2D" parent="MouseClickArea2D" index="0"]
 shape = SubResource("RectangleShape2D_1owhx")
+
+[node name="Glow" parent="." index="8"]
+scale = Vector2(0.25, 0.25)
+color = Color(1, 0, 0.0941176, 1)
 
 [editable path="HitboxComponent"]

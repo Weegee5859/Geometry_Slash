@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dxbsksc7i1htr" path="res://CollisionBoxes/CollisionBox.tscn" id="1_owijx"]
 [ext_resource type="Script" path="res://CollisionBoxes/HitboxComponent.gd" id="2_px8tk"]
 [ext_resource type="PackedScene" uid="uid://b6q3atgd5rv8w" path="res://Components/EntityComponents/damage_component.tscn" id="3_7xx6k"]
-[ext_resource type="AudioStream" uid="uid://dk1hfkcveh76m" path="res://Audio/impact-sound.mp3" id="4_a3cp7"]
+[ext_resource type="AudioStream" uid="uid://b8r3be6xhcgc" path="res://Audio/impact-sound_2.mp3" id="4_6rxyn"]
 
 [node name="HitboxComponent" node_paths=PackedStringArray("damage") instance=ExtResource("1_owijx")]
 collision_layer = 32
@@ -18,4 +18,6 @@ is_projectile_attack = false
 [node name="DamageComponent" parent="." index="1" instance=ExtResource("3_7xx6k")]
 
 [node name="AudioHit" type="AudioStreamPlayer2D" parent="." index="2"]
-stream = ExtResource("4_a3cp7")
+stream = ExtResource("4_6rxyn")
+volume_db = -10.0
+pitch_scale = 0.8

@@ -20,6 +20,9 @@ func enterState():
 	print(self.entity)
 	
 	Global.addParticleToWorld("pixel_explosion",entity.position,self)
+	# If player, shake the screen
+	if entity in Global.players:
+		Global.shakeCamera(0.2)
 
 func physicsProcessState(delta):
 	

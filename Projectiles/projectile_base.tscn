@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://kahrns6og4rr"]
+[gd_scene load_steps=8 format=3 uid="uid://kahrns6og4rr"]
 
 [ext_resource type="Script" path="res://Projectiles/ProjectileBase.gd" id="1_wpv2i"]
 [ext_resource type="PackedScene" uid="uid://bjgquag0s4p8w" path="res://Components/EntityComponents/health_component.tscn" id="2_ue5si"]
 [ext_resource type="PackedScene" uid="uid://bimh75ljo2dtt" path="res://CollisionBoxes/hitbox_component.tscn" id="3_3sxdg"]
 [ext_resource type="PackedScene" uid="uid://c8xosetoc7mpa" path="res://CollisionBoxes/hurtbox_component.tscn" id="4_01qiy"]
-[ext_resource type="AudioStream" uid="uid://b0gbevyxetnac" path="res://Audio/deflect.mp3" id="5_tgpo8"]
+[ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="4_6kdln"]
+[ext_resource type="PackedScene" uid="uid://b63y2la3cys7" path="res://Shaders/glow.tscn" id="5_jhu5b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwnqu"]
+resource_local_to_scene = true
+shader = ExtResource("4_6kdln")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [node name="ProjectileBase" type="CharacterBody2D"]
 script = ExtResource("1_wpv2i")
@@ -14,6 +21,7 @@ script = ExtResource("1_wpv2i")
 [node name="HitboxComponent" parent="." instance=ExtResource("3_3sxdg")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_gwnqu")
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("4_01qiy")]
 
@@ -24,14 +32,16 @@ script = ExtResource("1_wpv2i")
 [node name="ProjectileSpawn" type="AudioStreamPlayer2D" parent="."]
 
 [node name="DeflectSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_tgpo8")
 volume_db = 0.6
 pitch_scale = 1.7
 
 [node name="DeleteSelfTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 30.0
 one_shot = true
 autostart = true
+
+[node name="Glow" parent="." instance=ExtResource("5_jhu5b")]
+scale = Vector2(1e-05, 1e-05)
 
 [connection signal="input_event" from="MouseClickArea2D" to="." method="_on_mouse_click_area_2d_input_event"]
 [connection signal="timeout" from="DeleteSelfTimer" to="." method="_on_delete_self_timer_timeout"]

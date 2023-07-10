@@ -5,3 +5,4 @@
 
 [node name="HitstunState" instance=ExtResource("1_20irx")]
 script = ExtResource("2_evool")
+knockback_resistent = false

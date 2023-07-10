@@ -1,0 +1,38 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://ehtm2ex251do"]
+
+[ext_resource type="FontFile" uid="uid://dwsjcsp668u1n" path="res://UI/Fonts/ARCADECLASSIC.TTF" id="1_pvp8l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcdie"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xndhi"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
+
+[resource]
+ProgressBar/colors/font_color = Color(0, 0, 0, 1)
+ProgressBar/colors/font_outline_color = Color(1, 1, 1, 1)
+ProgressBar/colors/font_shadow_color = Color(0, 0, 0, 1)
+ProgressBar/constants/outline_size = 0
+ProgressBar/font_sizes/font_size = 18
+ProgressBar/fonts/font = ExtResource("1_pvp8l")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_fcdie")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_xndhi")

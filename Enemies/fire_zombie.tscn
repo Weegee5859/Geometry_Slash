@@ -37,7 +37,7 @@ scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_kpser")
 
 [node name="HealthComponent" parent="." index="1" node_paths=PackedStringArray("character")]
-max_health = 8
+max_health = 5
 character = NodePath("..")
 
 [node name="Sprite2D" parent="." index="2"]
@@ -62,7 +62,6 @@ projectile_rate = 200.0
 
 [node name="HitstunState" parent="StateMachine" index="2" node_paths=PackedStringArray("entity") instance=ExtResource("6_p50lx")]
 entity = NodePath("../..")
-knockback_resistent = false
 
 [node name="HitboxComponent" parent="." index="5" node_paths=PackedStringArray("damage", "origin") instance=ExtResource("8_nny4h")]
 damage = NodePath("DamageComponent")

@@ -46,9 +46,16 @@ func _process(delta):
 					if audio_hit.stream:
 						audio_hit.play()
 			# Deleting Self
-			if deleteOriginOnContact and "health_component" in get_parent():
+			if deleteOriginOnContact and "health_component" in get_parent():	
+				# Delete itself too early so the hitstun_state can't finish run processDamage
+				# Therefore audio and knockback won't get run for the person getting hit
+				# with the projectile
+				# Added await timer gives time for function to process (Should Change?)
+				await get_tree().create_timer(0.2).timeout
+				# Kill Parent of hitbox
 				self.get_parent().health_component.die()
 			
-			print("============================================")
-			print(body.isEnemyBox)
-			print(isEnemyBox)
+			if weakref(body).get_ref():
+				print("============================================")
+				print(body.isEnemyBox)
+				print(isEnemyBox)

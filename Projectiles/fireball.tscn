@@ -1,18 +1,23 @@
 [gd_scene load_steps=8 format=3 uid="uid://c5w3nslycj8rh"]
 
 [ext_resource type="PackedScene" uid="uid://kahrns6og4rr" path="res://Projectiles/projectile_base.tscn" id="1_sgdyo"]
-[ext_resource type="Texture2D" uid="uid://bpcosvpyidis3" path="res://Sprites/bullet_blaster.png" id="2_sq0iq"]
-[ext_resource type="PackedScene" uid="uid://b63y2la3cys7" path="res://Shaders/glow.tscn" id="3_su886"]
-[ext_resource type="AudioStream" uid="uid://bjj2nejcjege8" path="res://Audio/fireball_shot.mp3" id="4_ur8ms"]
+[ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="2_2ooyh"]
+[ext_resource type="Texture2D" uid="uid://bpcosvpyidis3" path="res://Sprites/bullet_blaster.png" id="2_h5y0d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rc6v"]
 size = Vector2(72, 102)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2hi37"]
+resource_local_to_scene = true
+shader = ExtResource("2_2ooyh")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71dlb"]
 size = Vector2(148, 132)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8gnl"]
-size = Vector2(120, 116)
+[sub_resource type="CircleShape2D" id="CircleShape2D_va3tq"]
+radius = 160.131
 
 [node name="Fireball" instance=ExtResource("1_sgdyo")]
 speed = 225
@@ -33,15 +38,17 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_7rc6v")
 
 [node name="DamageComponent" parent="HitboxComponent" index="1"]
-damage = 8
+damage = 5
 knockback = 5
 
 [node name="AudioHit" parent="HitboxComponent" index="2"]
+stream = null
 volume_db = -80.0
 
 [node name="Sprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_2hi37")
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_sq0iq")
+texture = ExtResource("2_h5y0d")
 
 [node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("origin")]
 isDeflectable = true
@@ -53,20 +60,18 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_71dlb")
 
 [node name="CollisionShape2D" parent="MouseClickArea2D" index="0"]
-position = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_v8gnl")
+shape = SubResource("CircleShape2D_va3tq")
 
-[node name="Glow" parent="." index="5" instance=ExtResource("3_su886")]
-scale = Vector2(0.3, 0.3)
-color = Color(1, 0.172549, 0.0901961, 1)
-
-[node name="ProjectileSpawn" parent="." index="6"]
-stream = ExtResource("4_ur8ms")
+[node name="ProjectileSpawn" parent="." index="5"]
 volume_db = -12.0
 pitch_scale = 2.01
 
-[node name="DeflectSound" parent="." index="7"]
+[node name="DeflectSound" parent="." index="6"]
 volume_db = -8.0
+
+[node name="Glow" parent="." index="8"]
+scale = Vector2(0.3, 0.3)
+color = Color(1, 0.137255, 0, 1)
 
 [editable path="HitboxComponent"]
 [editable path="HurtboxComponent"]

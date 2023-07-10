@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3b3rbm02a10c"]
+
+[ext_resource type="FontFile" uid="uid://dwsjcsp668u1n" path="res://UI/Fonts/ARCADECLASSIC.TTF" id="1_jycw1"]
+[ext_resource type="Script" path="res://UI/Redirect_Button.gd" id="2_pbx2b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dumlr"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Button" type="Button"]
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_jycw1")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_dumlr")
+button_mask = 7
+text = "Main Menu"
+script = ExtResource("2_pbx2b")
+redirection_file_path = "\"res://Levels/level.tscn\""
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

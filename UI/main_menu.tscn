@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1vfs6nxqk3mt"]
+
+[ext_resource type="PackedScene" uid="uid://c3b3rbm02a10c" path="res://UI/redirect_button.tscn" id="1_f7hl8"]
+[ext_resource type="Script" path="res://UI/exit_button.gd" id="2_6nt2m"]
+[ext_resource type="FontFile" uid="uid://dwsjcsp668u1n" path="res://UI/Fonts/ARCADECLASSIC.TTF" id="2_76m6t"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 321.0
+offset_right = 1009.0
+offset_bottom = 544.0
+alignment = 1
+
+[node name="Button" parent="VBoxContainer" instance=ExtResource("1_f7hl8")]
+layout_mode = 2
+text = "Start Game"
+redirection_file_path = "res://Levels/level.tscn"
+
+[node name="Button2" parent="VBoxContainer" instance=ExtResource("1_f7hl8")]
+layout_mode = 2
+text = "Tutorial"
+redirection_file_path = "res://Levels/tutorial_level.tscn"
+
+[node name="Button3" parent="VBoxContainer" instance=ExtResource("1_f7hl8")]
+layout_mode = 2
+text = "Exit"
+script = ExtResource("2_6nt2m")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 47.0
+offset_right = 1095.0
+offset_bottom = 223.0
+theme_override_fonts/font = ExtResource("2_76m6t")
+theme_override_font_sizes/font_size = 128
+text = "Geomtry  Slash"
+horizontal_alignment = 1
+vertical_alignment = 1

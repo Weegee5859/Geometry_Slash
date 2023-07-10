@@ -5,6 +5,8 @@ func enterState():
 	player.velocity = Vector2(0,0)
 
 func physicsProcessState(delta):
+	if Global.paused:
+		return
 	# If you click on player, player is ready to attack
 	if Input.is_action_just_pressed("click") and player.mouse_is_on_player:
 		state_machine.changeState("readyState")

@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6c3mfmqfqxt1"]
+
+[ext_resource type="Texture2D" uid="uid://bv3wjnfqj75c" path="res://Sprites/menu_background.png" id="1_fsr4o"]
+[ext_resource type="FontFile" uid="uid://dwsjcsp668u1n" path="res://UI/Fonts/ARCADECLASSIC.TTF" id="2_s3kan"]
+[ext_resource type="PackedScene" uid="uid://c3b3rbm02a10c" path="res://UI/redirect_button.tscn" id="3_drqwi"]
+
+[node name="GameoverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 460.0
+offset_top = 125.0
+offset_right = 902.0
+offset_bottom = 553.0
+texture = ExtResource("1_fsr4o")
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 38.0
+offset_right = 402.0
+offset_bottom = 402.0
+
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s3kan")
+theme_override_font_sizes/font_size = 48
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "
+
+
+
+
+"
+
+[node name="Button" parent="TextureRect/VBoxContainer" instance=ExtResource("3_drqwi")]
+layout_mode = 2
+redirection_file_path = "res://UI/main_menu.tscn"

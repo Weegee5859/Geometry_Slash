@@ -25,9 +25,16 @@ func takeDamage(damage: DamageComponent,damage_origin: CharacterBody2D=null):
 		die(damage_origin)
 		
 func die(cause_of_death: CharacterBody2D = null):
+	# If character is not given, character can't die
 	if not character: return
+	# Give cause of death credit for kill
 	if cause_of_death:
 		if "got_kill" in cause_of_death:
 			cause_of_death.got_kill = true
-	Global.addParticleToWorld(death_particle_effect,character.position,character)
-	character.queue_free()
+	
+	if character in Global.players:
+		Global.gameOver()
+	else:
+		Global.addParticleToWorld(death_particle_effect,character.position,character)
+		character.queue_free()
+		

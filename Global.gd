@@ -1,6 +1,10 @@
 extends Node2D
 
+var paused: bool
 var players: Array[CharacterBody2D]
+var gameover_screen = preload("res://UI/gameover_screen.tscn")
+var camera = preload("res://Camera/camera_2d.tscn")
+var instantiated_camera = null
 
 var particles: Dictionary = {
 	"hit_spark": preload("res://Particles/hit_spark_particle.tscn"),
@@ -14,7 +18,17 @@ var projectiles: Dictionary = {
 	"fireball": preload("res://Projectiles/fireball.tscn")
 }
 
-
+func addCamera():
+	var inst = camera.instantiate()
+	instantiated_camera = inst
+	get_tree().root.get_child(1).add_child(inst)
+	#shakeCamera()
+	
+func shakeCamera(time: float = 0.2):
+	var camera = get_tree().root.get_child(1).get_node("Camera")
+	if camera:
+		camera.startShake(time)
+	
 func addPlayer(player):
 	if player in players: return
 	players.append(player)
@@ -36,4 +50,14 @@ func addProjectileToWorld(projectile_name: String,new_position: Vector2,new_dire
 	inst.position = new_position
 	inst.direction = new_direction
 	#user.add_child(inst)
+	get_tree().root.get_child(1).add_child(inst)
+	
+func gameOver():
+	for character in Global.players:
+		character.hitbox_component.collision_shape.disabled = true
+		character.hurtbox_component.collision_shape.disabled = true
+		character.sprite.visible = false
+		character.player_glow.visible = false
+	Global.paused = true
+	var inst = gameover_screen.instantiate()
 	get_tree().root.get_child(1).add_child(inst)

@@ -29,9 +29,11 @@ extends CharacterBody2D
 @onready var mouse_distance: float
 
 @onready var dash_indicator = $DashIndicator
+@onready var player_glow = $PlayerGlow
 
 func _ready():
 	Global.addPlayer(self)
+	Global.paused = false
 	disableSwing()
 	dash_indicator.add_point(self.global_position)
 	dash_indicator.add_point(get_global_mouse_position())
