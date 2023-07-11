@@ -51,6 +51,9 @@ func _process(delta):
 				# Therefore audio and knockback won't get run for the person getting hit
 				# with the projectile
 				# Added await timer gives time for function to process (Should Change?)
+				self.get_parent().sprite.visible = false
+				self.get_parent().hitbox_component.active = false
+				self.get_parent().hurtbox_component.active = false
 				await get_tree().create_timer(0.2).timeout
 				# Kill Parent of hitbox
 				self.get_parent().health_component.die()

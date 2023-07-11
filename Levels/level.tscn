@@ -26,6 +26,14 @@ size = Vector2(1301, 20)
 [node name="Floor" parent="." instance=ExtResource("1_il35b")]
 
 [node name="PlayerStats" parent="." instance=ExtResource("2_ul8jv")]
+offset_left = 42.0
+offset_top = 6.0
+offset_right = 42.0
+offset_bottom = 6.0
+
+[node name="VBoxContainer" parent="PlayerStats" index="0"]
+offset_left = 42.0
+offset_right = 229.0
 
 [node name="HealthBar" parent="PlayerStats/VBoxContainer" index="0" node_paths=PackedStringArray("health_component")]
 health_component = NodePath("../../../Player/HealthComponent")

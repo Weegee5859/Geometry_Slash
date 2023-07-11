@@ -22,6 +22,8 @@ font_size = 26
 [node name="Floor" parent="." instance=ExtResource("1_j5d5w")]
 
 [node name="PlayerStats" parent="." instance=ExtResource("2_qbbmn")]
+offset_left = 46.0
+offset_right = 46.0
 
 [node name="HealthBar" parent="PlayerStats/VBoxContainer" index="0" node_paths=PackedStringArray("health_component")]
 health_component = NodePath("../../../Player/HealthComponent")

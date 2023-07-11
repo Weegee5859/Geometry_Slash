@@ -34,12 +34,11 @@ script = ExtResource("2_lbp8b")
 
 [node name="hp_icon" type="TextureRect" parent="."]
 texture_filter = 1
-layout_mode = 0
-offset_left = 3.0
+layout_mode = 2
+offset_left = 5.0
 offset_top = 18.0
-offset_right = 131.0
-offset_bottom = 146.0
-scale = Vector2(0.25, 0.25)
+offset_right = 36.0
+offset_bottom = 51.0
 texture = ExtResource("4_hc6qb")
 
 [node name="dash_icon" type="TextureRect" parent="."]
