@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5w3nslycj8rh"]
+[gd_scene load_steps=8 format=3 uid="uid://c5w3nslycj8rh"]
 
 [ext_resource type="PackedScene" uid="uid://kahrns6og4rr" path="res://Projectiles/projectile_base.tscn" id="1_sgdyo"]
 [ext_resource type="Shader" uid="uid://cb7ohitfptxy1" path="res://Shaders/hit_flash.tres" id="2_2ooyh"]
+[ext_resource type="Texture2D" uid="uid://bpcosvpyidis3" path="res://Sprites/bullet_blaster.png" id="3_ev3mn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rc6v"]
 size = Vector2(72, 102)
@@ -16,7 +17,7 @@ shader_parameter/tint = Color(1, 1, 1, 1)
 size = Vector2(148, 132)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_va3tq"]
-radius = 160.131
+radius = 68.1175
 
 [node name="Fireball" instance=ExtResource("1_sgdyo")]
 speed = 225
@@ -46,6 +47,7 @@ volume_db = -80.0
 [node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_2hi37")
 scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_ev3mn")
 
 [node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("origin")]
 isDeflectable = true
